@@ -1,0 +1,47 @@
+<#include "managegraph_tabs.html" />
+<@tabs tab="graph" />
+
+<div class="row" >
+    <div class="span12">
+
+    <form class="form-horizontal" method="post" action="jsp/admin/plugins/graphite/ManageGraphs.jsp">
+        <fieldset>
+            <legend>#i18n{graphite.create_graph.tableLabel}</legend>
+
+            <@messages errors=errors />
+
+            <input type="hidden" id="id_graph" name="id_graph"  />
+            <div class="control-group">
+                <label class="control-label" for="graph_title" >#i18n{graphite.create_graph.labelGraphTitle} * :</label>
+                <div class="controls">
+                    <input type="text" id="graph_title" name="graph_title" value="${graph.GraphTitle!''}" maxlength="50" tabindex="1" />
+                    <span class="help-block">#i18n{graphite.create_graph.labelGraphTitle.help}</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="graph_url" >#i18n{graphite.create_graph.labelGraphUrl} * :</label>
+                <div class="controls">
+                    <input type="text" id="graph_url" name="graph_url" value="${graph.GraphUrl!''}" maxlength="500" tabindex="2" />
+                    <span class="help-block">#i18n{graphite.create_graph.labelGraphUrl.help}</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="graph_order" >#i18n{graphite.create_graph.labelGraphOrder} * :</label>
+                <div class="controls">
+                    <input type="text" id="graph_order" name="graph_order" value="${graph.GraphOrder!''}" maxlength="3" tabindex="3" />
+                    <span class="help-block">#i18n{graphite.create_graph.labelGraphOrder.help}</span>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button name="action_createGraph" class="btn btn-primary" type="submit" tabindex="4">
+                    #i18n{portal.util.labelCreate}
+                </button>
+                <button name="view_manageGraphs" class="btn" type="submit" >
+                    #i18n{portal.util.labelCancel}
+                </button>
+            </div>
+        </fieldset>
+    </form>
+    </div>
+</div>
+

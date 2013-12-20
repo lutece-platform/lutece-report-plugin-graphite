@@ -1,0 +1,60 @@
+<#include "managegraph_tabs.html" />
+<@tabs tab="graph" />
+
+<div class="row-fluid" >
+    <div class="span12">
+
+        <@messages infos=infos />
+
+        <form method="post"  action="jsp/admin/plugins/graphite/ManageGraphs.jsp">
+            <button name="view_createGraph" class="btn btn-primary pull-right" type="submit">
+                <i class="icon-plus icon-white"></i>
+                #i18n{graphite.manage_graphs.buttonAdd}
+            </button>
+        </form>
+
+    <h4>#i18n{graphite.manage_graphs.tableLabel}</h4>    
+
+    <@paginationAdmin paginator=paginator combo=1 />
+    
+    <table class="table table-condensed table-striped">
+        <tr>
+                    <input type="hidden" id="id_graph" name="id_graph"  />
+                    <th>#i18n{graphite.manage_graphs.columnGraphTitle}</th>
+                    <th>#i18n{graphite.manage_graphs.columnGraphUrl}</th>
+                    <th>#i18n{graphite.manage_graphs.columnGraphOrder}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+            <#list graph_list as graph >
+        <tr>
+                    <input type="hidden" id="id_graph" name="id_graph"  />
+                    <td>
+                        ${graph.graphTitle}
+                    </td>
+                    <td>
+                        ${graph.graphUrl}
+                    </td>
+                    <td>
+                        ${graph.graphOrder}
+                    </td>
+        <td>
+            <a href="jsp/admin/plugins/graphite/ManageGraphs.jsp?view=modifyGraph&id_graph=${graph.idGraph}"
+               class="btn btn-primary btn-small" title="#i18n{portal.util.labelModify}">
+                <i class="icon-edit icon-white"></i>
+            </a>
+
+            <a href="jsp/admin/plugins/graphite/ManageGraphs.jsp?action=confirmRemoveGraph&id_graph=${graph.idGraph}"
+               class="btn btn-danger btn-small" title="#i18n{portal.util.labelDelete}" >
+                <i class="icon-trash icon-white"></i>
+            </a>
+        </td>
+        </tr>
+        </#list>
+    </table>
+
+    <@paginationAdmin paginator=paginator />
+
+    </div>
+</div>
+
+
