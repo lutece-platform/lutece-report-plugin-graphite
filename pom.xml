@@ -11,7 +11,7 @@
     <artifactId>plugin-graphite</artifactId>
     <packaging>lutece-plugin</packaging>
     <version>0.9.0-SNAPSHOT</version>
-    <name>Lutece graphite plugin</name>
+    <name>Lutece graphite plugin</name> 
 
     <repositories>
         <repository>
