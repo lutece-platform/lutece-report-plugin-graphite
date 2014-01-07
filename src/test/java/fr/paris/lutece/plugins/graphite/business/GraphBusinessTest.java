@@ -31,6 +31,7 @@
  *
  * License 1.0
  */
+
 package fr.paris.lutece.plugins.graphite.business;
 
 import fr.paris.lutece.test.LuteceTestCase;
@@ -46,43 +47,56 @@ public class GraphBusinessTest extends LuteceTestCase
     private final static String GRAPHURL2 = "GraphUrl2";
     private final static int GRAPHORDER1 = 1;
     private final static int GRAPHORDER2 = 2;
+    private final static String GRAPHCATEGORY1 = "GraphCategory1";
+    private final static String GRAPHCATEGORY2 = "GraphCategory2";
+    private final static String GRAPHCOMMENT1 = "GraphComment1";
+    private final static String GRAPHCOMMENT2 = "GraphComment2";
 
     public void testBusiness(  )
     {
         // Initialize an object
-        Graph graph = new Graph(  );
+        Graph graph = new Graph();
         graph.setIdGraph( IDGRAPH1 );
         graph.setGraphTitle( GRAPHTITLE1 );
         graph.setGraphUrl( GRAPHURL1 );
         graph.setGraphOrder( GRAPHORDER1 );
+        graph.setGraphCategory( GRAPHCATEGORY1 );
+        graph.setGraphComment( GRAPHCOMMENT1 );
 
         // Create test
         GraphHome.create( graph );
-
-        Graph graphStored = GraphHome.findByPrimaryKey( graph.getIdGraph(  ) );
-        assertEquals( graphStored.getIdGraph(  ), graph.getIdGraph(  ) );
-        assertEquals( graphStored.getGraphTitle(  ), graph.getGraphTitle(  ) );
-        assertEquals( graphStored.getGraphUrl(  ), graph.getGraphUrl(  ) );
-        assertEquals( graphStored.getGraphOrder(  ), graph.getGraphOrder(  ) );
+        Graph graphStored = GraphHome.findByPrimaryKey( graph.getIdGraph() );
+        assertEquals( graphStored.getIdGraph() , graph.getIdGraph() );
+        assertEquals( graphStored.getGraphTitle() , graph.getGraphTitle() );
+        assertEquals( graphStored.getGraphUrl() , graph.getGraphUrl() );
+        assertEquals( graphStored.getGraphOrder() , graph.getGraphOrder() );
+        assertEquals( graphStored.getGraphCategory() , graph.getGraphCategory() );
+        assertEquals( graphStored.getGraphComment() , graph.getGraphComment() );
 
         // Update test
         graph.setIdGraph( IDGRAPH2 );
         graph.setGraphTitle( GRAPHTITLE2 );
         graph.setGraphUrl( GRAPHURL2 );
         graph.setGraphOrder( GRAPHORDER2 );
+        graph.setGraphCategory( GRAPHCATEGORY2 );
+        graph.setGraphComment( GRAPHCOMMENT2 );
         GraphHome.update( graph );
-        graphStored = GraphHome.findByPrimaryKey( graph.getIdGraph(  ) );
-        assertEquals( graphStored.getIdGraph(  ), graph.getIdGraph(  ) );
-        assertEquals( graphStored.getGraphTitle(  ), graph.getGraphTitle(  ) );
-        assertEquals( graphStored.getGraphUrl(  ), graph.getGraphUrl(  ) );
-        assertEquals( graphStored.getGraphOrder(  ), graph.getGraphOrder(  ) );
+        graphStored = GraphHome.findByPrimaryKey( graph.getIdGraph() );
+        assertEquals( graphStored.getIdGraph() , graph.getIdGraph() );
+        assertEquals( graphStored.getGraphTitle() , graph.getGraphTitle() );
+        assertEquals( graphStored.getGraphUrl() , graph.getGraphUrl() );
+        assertEquals( graphStored.getGraphOrder() , graph.getGraphOrder() );
+        assertEquals( graphStored.getGraphCategory() , graph.getGraphCategory() );
+        assertEquals( graphStored.getGraphComment() , graph.getGraphComment() );
 
         // List test
-        GraphHome.getGraphsList(  );
+        GraphHome.getGraphsList();
 
         // Delete test
-        GraphHome.remove( graph.getIdGraph(  ) );
-        graphStored = GraphHome.findByPrimaryKey( graph.getIdGraph(  ) );
+        GraphHome.remove( graph.getIdGraph() );
+        graphStored = GraphHome.findByPrimaryKey( graph.getIdGraph() );
         assertNull( graphStored );
+        
     }
+
 }

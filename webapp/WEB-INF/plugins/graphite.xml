@@ -2,14 +2,14 @@
 <plug-in>
     <name>graphite</name>
     <class>fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation</class>
-    <version>0.9.0</version>
+    <version>1.0.0</version>
     <documentation></documentation>
     <installation></installation>
     <changes></changes>
     <user-guide></user-guide>
     <description>graphite.plugin.description</description>
     <provider>graphite.plugin.provider</provider>
-    <provider-url>http://dev.lutece.paris.fr</provider-url>
+    <provider-url>http://fr.lutece.paris.fr</provider-url>
     <icon-url>images/admin/skin/feature_default_icon.png</icon-url>
     <copyright>Copyright (c) 2013 Mairie de Paris</copyright>
     <db-pool-required>1</db-pool-required>
@@ -21,7 +21,15 @@
             <feature-title>graphite.adminFeature.ManageGraph.name</feature-title>
             <feature-description>graphite.adminFeature.ManageGraph.description</feature-description>
             <feature-level>0</feature-level>
-            <feature-url>jsp/admin/plugins/graphite/ManageGraphs.jsp</feature-url>
+            <feature-url>jsp/admin/plugins/graphite/ManageCategorys.jsp</feature-url>
+            <feature-icon-url></feature-icon-url>
+      </admin-feature>
+        <admin-feature>
+            <feature-id>GRAPHITE_VIEW</feature-id>
+            <feature-title>graphite.adminFeature.ViewGraph.name</feature-title>
+            <feature-description>graphite.adminFeature.ViewGraph.description</feature-description>
+            <feature-level>0</feature-level>
+            <feature-url>jsp/admin/plugins/graphite/ViewGraphs.jsp</feature-url>
             <feature-icon-url></feature-icon-url>
       </admin-feature>
     </admin-features>    
@@ -29,10 +37,26 @@
     <applications>
         <application>
             <application-id>graphite</application-id>
-            <application-class>fr.paris.lutece.plugins.graphite.web.GraphiteApp</application-class>
+            <application-class>fr.paris.lutece.plugins.graphite.web.graphite</application-class>
         </application>
     </applications>
 	<!-- Portlet parameters -->
     <portlets>
+     <portlet>
+       <portlet-class>fr.paris.lutece.plugins.graphite.business.portlet.GraphitePortletHome</portlet-class>
+	   <portlet-type-id>GRAPHITE_PORTLET</portlet-type-id>
+	   <portlet-type-name>graphite.portlet.graphiteGraphitePortlet.name</portlet-type-name>
+	   <portlet-creation-url>plugins/graphite/CreatePortletGraphite.jsp</portlet-creation-url>
+	   <portlet-update-url>plugins/graphite/ModifyPortletGraphite.jsp</portlet-update-url>
+	   <portlet-create-action-url>plugins/graphite/DoCreatePortletGraphite.jsp</portlet-create-action-url>
+      <portlet-modify-action-url>plugins/graphite/DoModifyPortletGraphite.jsp</portlet-modify-action-url>
+	    <!-- optional entries -->
+        <portlet-create-script-template>/admin/portlet/script_create_portlet.html</portlet-create-script-template>
+        <portlet-modify-script-template>/admin/portlet/script_modify_portlet.html</portlet-modify-script-template>
+        <portlet-create-specific-template>/admin/plugins/graphite/portlet/create_portletgraphite.html</portlet-create-specific-template>
+        <portlet-modify-specific-template>/admin/plugins/graphite/portlet/modify_portletgraphite.html</portlet-modify-specific-template>
+        <portlet-create-specific-form-template></portlet-create-specific-form-template>
+        <portlet-modify-specific-form-template></portlet-modify-specific-form-template> 
+     </portlet>
    </portlets>
 </plug-in>

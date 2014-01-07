@@ -30,104 +30,145 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * License 1.0
- */
+ */ 
 package fr.paris.lutece.plugins.graphite.business;
 
-import org.hibernate.validator.constraints.*;
-
 import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.*;
 
 
 /**
  * This is the business class for the object Graph
- */
+ */ 
 public class Graph
 {
-    // Variables declarations 
-    private int _nIdGraph;
+	// Variables declarations 
+        
+	private int _nIdGraph;
+        // @NotEmpty( message = "#i18n{graphite.validation.graph.GraphTitle.notEmpty}" )
+        @NotEmpty( message = "#i18n{portal.validation.message.notEmpty}" )
+        // @Size( max = 50 , message = "#i18n{graphite.validation.graph.GraphTitle.size}" ) 
+        @Size( max = 50 , message = "#i18n{portal.validation.message.sizeMax}" ) 
+        
+	private String _strGraphTitle;
+        // @NotEmpty( message = "#i18n{graphite.validation.graph.GraphUrl.notEmpty}" )
+        @NotEmpty( message = "#i18n{portal.validation.message.notEmpty}" )
+        // @Size( max = 255 , message = "#i18n{graphite.validation.graph.GraphUrl.size}" ) 
+        @Size( max = 255 , message = "#i18n{portal.validation.message.sizeMax}" ) 
+        
+	private String _strGraphUrl;
+        
+	private int _nGraphOrder;
+        // @NotEmpty( message = "#i18n{graphite.validation.graph.GraphCategory.notEmpty}" )
+        @NotEmpty( message = "#i18n{portal.validation.message.notEmpty}" )
+        // @Size( max = 255 , message = "#i18n{graphite.validation.graph.GraphCategory.size}" ) 
+        @Size( max = 255 , message = "#i18n{portal.validation.message.sizeMax}" ) 
+        
+	private String _strGraphCategory;
+        // @Size( max = 255 , message = "#i18n{graphite.validation.graph.GraphComment.size}" ) 
+        @Size( max = 255 , message = "#i18n{portal.validation.message.sizeMax}" ) 
+        
+	private String _strGraphComment;
+	/**
+	 * Returns the IdGraph
+	 * @return The IdGraph
+	 */
+	public int getIdGraph()
+	{
+		return _nIdGraph;
+	}
 
-    // @NotEmpty( message = "#i18n{graphite.validation.graph.GraphTitle.notEmpty}" )
-    @NotEmpty( message = "#i18n{portal.validation.message.notEmpty}" )
-    // @Size( max = 50 , message = "#i18n{graphite.validation.graph.GraphTitle.size}" ) 
-    @Size( max = 50, message = "#i18n{portal.validation.message.sizeMax}" )
-    private String _strGraphTitle;
+	/**
+	 * Sets the IdGraph
+	 * @param nIdGraph The IdGraph
+	 */ 
+	public void setIdGraph( int nIdGraph )
+	{
+		_nIdGraph = nIdGraph;
+	}
+	/**
+	 * Returns the GraphTitle
+	 * @return The GraphTitle
+	 */
+	public String getGraphTitle()
+	{
+		return _strGraphTitle;
+	}
 
-    // @NotEmpty( message = "#i18n{graphite.validation.graph.GraphUrl.notEmpty}" )
-    @NotEmpty( message = "#i18n{portal.validation.message.notEmpty}" )
-    // @Size( max = 500 , message = "#i18n{graphite.validation.graph.GraphUrl.size}" ) 
-    @Size( max = 500, message = "#i18n{portal.validation.message.sizeMax}" )
-    private String _strGraphUrl;
-    private int _nGraphOrder;
+	/**
+	 * Sets the GraphTitle
+	 * @param strGraphTitle The GraphTitle
+	 */ 
+	public void setGraphTitle( String strGraphTitle )
+	{
+		_strGraphTitle = strGraphTitle;
+	}
+	/**
+	 * Returns the GraphUrl
+	 * @return The GraphUrl
+	 */
+	public String getGraphUrl()
+	{
+		return _strGraphUrl;
+	}
 
-    /**
-     * Returns the IdGraph
-     * @return The IdGraph
-     */
-    public int getIdGraph(  )
-    {
-        return _nIdGraph;
-    }
+	/**
+	 * Sets the GraphUrl
+	 * @param strGraphUrl The GraphUrl
+	 */ 
+	public void setGraphUrl( String strGraphUrl )
+	{
+		_strGraphUrl = strGraphUrl;
+	}
+	/**
+	 * Returns the GraphOrder
+	 * @return The GraphOrder
+	 */
+	public int getGraphOrder()
+	{
+		return _nGraphOrder;
+	}
 
-    /**
-     * Sets the IdGraph
-     * @param nIdGraph The IdGraph
-     */
-    public void setIdGraph( int nIdGraph )
-    {
-        _nIdGraph = nIdGraph;
-    }
+	/**
+	 * Sets the GraphOrder
+	 * @param nGraphOrder The GraphOrder
+	 */ 
+	public void setGraphOrder( int nGraphOrder )
+	{
+		_nGraphOrder = nGraphOrder;
+	}
+	/**
+	 * Returns the GraphCategory
+	 * @return The GraphCategory
+	 */
+	public String getGraphCategory()
+	{
+		return _strGraphCategory;
+	}
 
-    /**
-     * Returns the GraphTitle
-     * @return The GraphTitle
-     */
-    public String getGraphTitle(  )
-    {
-        return _strGraphTitle;
-    }
+	/**
+	 * Sets the GraphCategory
+	 * @param strGraphCategory The GraphCategory
+	 */ 
+	public void setGraphCategory( String strGraphCategory )
+	{
+		_strGraphCategory = strGraphCategory;
+	}
+	/**
+	 * Returns the GraphComment
+	 * @return The GraphComment
+	 */
+	public String getGraphComment()
+	{
+		return _strGraphComment;
+	}
 
-    /**
-     * Sets the GraphTitle
-     * @param strGraphTitle The GraphTitle
-     */
-    public void setGraphTitle( String strGraphTitle )
-    {
-        _strGraphTitle = strGraphTitle;
-    }
-
-    /**
-     * Returns the GraphUrl
-     * @return The GraphUrl
-     */
-    public String getGraphUrl(  )
-    {
-        return _strGraphUrl;
-    }
-
-    /**
-     * Sets the GraphUrl
-     * @param strGraphUrl The GraphUrl
-     */
-    public void setGraphUrl( String strGraphUrl )
-    {
-        _strGraphUrl = strGraphUrl;
-    }
-
-    /**
-     * Returns the GraphOrder
-     * @return The GraphOrder
-     */
-    public int getGraphOrder(  )
-    {
-        return _nGraphOrder;
-    }
-
-    /**
-     * Sets the GraphOrder
-     * @param nGraphOrder The GraphOrder
-     */
-    public void setGraphOrder( int nGraphOrder )
-    {
-        _nGraphOrder = nGraphOrder;
-    }
+	/**
+	 * Sets the GraphComment
+	 * @param strGraphComment The GraphComment
+	 */ 
+	public void setGraphComment( String strGraphComment )
+	{
+		_strGraphComment = strGraphComment;
+	}
 }

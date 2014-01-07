@@ -9,7 +9,7 @@
             <item name="Accueil" href="index.html"/>
         </menu>
         
-        <menu name="Téléchargements" inherit="bottom" >
+        <menu name="TÃ©lÃ©chargements" inherit="bottom" >
             <item name="Versions stables" href="../../../stable_builds/plugins/plugin-graphite/"/>
             <item name="Nightly builds" href="../../../nightly_builds/plugins/plugin-graphite/" />
         </menu>

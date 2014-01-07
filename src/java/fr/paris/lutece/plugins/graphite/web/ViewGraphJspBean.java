@@ -33,38 +33,22 @@
  */
 package fr.paris.lutece.plugins.graphite.web;
 
-import fr.paris.lutece.plugins.graphite.business.GraphHome;
-import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
-import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
-import fr.paris.lutece.portal.util.mvc.xpage.annotations.Controller;
-import fr.paris.lutece.portal.web.xpages.XPage;
-
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
+import fr.paris.lutece.portal.util.mvc.admin.MVCAdminJspBean;
 
 
 /**
- * This class provides a simple implementation of an XPage
+ * ViewGraph JSP Bean abstract class for JSP Bean
  */
-@Controller( xpageName = "GraphiteApp", pageTitleProperty = "graphite.pageTitle", pagePathProperty = "graphite.pagePathLabel" )
-public class GraphiteApp extends MVCApplication
+public abstract class ViewGraphJspBean extends MVCAdminJspBean
 {
-    private static final String TEMPLATE_XPAGE = "/skin/plugins/graphite/graphite.html";
-    private static final String MARKER_GRAPHS_LIST = "graphs_list";
-    private static final String VIEW_HOME = "home";
+    // Right
+    public static final String RIGHT_VIEWGRAPH = "GRAPHITE_VIEW";
+    protected static final String PARAMETER_PAGE_INDEX = "page_index";
+    protected static final String MARK_PAGINATOR = "paginator";
+    protected static final String MARK_NB_ITEMS_PER_PAGE = "nb_items_per_page";
 
-    /**
-     * Returns the content of the page GraphiteApp.
-     * @param request The HTTP request
-     * @return The view
-     */
-    @View( value = VIEW_HOME, defaultView = true )
-    public XPage viewHome( HttpServletRequest request )
-    {
-        Map<String, Object> model = getModel(  );
-        model.put( MARKER_GRAPHS_LIST, GraphHome.getGraphsList(  ) );
-
-        return getXPage( TEMPLATE_XPAGE, request.getLocale(  ), model );
-    }
+    //Variables
+    protected int _nDefaultItemsPerPage;
+    protected String _strCurrentPageIndex;
+    protected int _nItemsPerPage;
 }

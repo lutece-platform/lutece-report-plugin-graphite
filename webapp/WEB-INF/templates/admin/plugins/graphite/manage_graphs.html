@@ -23,6 +23,8 @@
                     <th>#i18n{graphite.manage_graphs.columnGraphTitle}</th>
                     <th>#i18n{graphite.manage_graphs.columnGraphUrl}</th>
                     <th>#i18n{graphite.manage_graphs.columnGraphOrder}</th>
+                    <th>#i18n{graphite.manage_graphs.columnGraphCategory}</th>
+                    <th>#i18n{graphite.manage_graphs.columnGraphComment}</th>
             <th>#i18n{portal.util.labelActions}</th>
         </tr>
             <#list graph_list as graph >
@@ -36,6 +38,12 @@
                     </td>
                     <td>
                         ${graph.graphOrder}
+                    </td>
+                    <td>
+                        ${graph.graphCategory}
+                    </td>
+                    <td>
+                        ${graph.graphComment}
                     </td>
         <td>
             <a href="jsp/admin/plugins/graphite/ManageGraphs.jsp?view=modifyGraph&id_graph=${graph.idGraph}"

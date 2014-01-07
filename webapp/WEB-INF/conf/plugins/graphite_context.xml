@@ -4,5 +4,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" >
 
+    <bean id="graphite.categoryDAO"  class="fr.paris.lutece.plugins.graphite.business.CategoryDAO" />  
     <bean id="graphite.graphDAO"  class="fr.paris.lutece.plugins.graphite.business.GraphDAO" />  
+    
+    <bean id="graphite.GraphitePortletDAO"  class="fr.paris.lutece.plugins.graphite.business.portlet.GraphitePortletDAO" />    
 </beans>

@@ -31,8 +31,12 @@
  *
  * License 1.0
  */
+
+ 
 package fr.paris.lutece.plugins.graphite.web;
 
+import fr.paris.lutece.plugins.graphite.business.Category;
+import fr.paris.lutece.plugins.graphite.business.CategoryHome;
 import fr.paris.lutece.plugins.graphite.business.Graph;
 import fr.paris.lutece.plugins.graphite.business.GraphHome;
 import fr.paris.lutece.portal.service.message.AdminMessage;
@@ -42,11 +46,13 @@ import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.web.util.LocalizedPaginator;
+import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.html.Paginator;
 import fr.paris.lutece.util.url.UrlItem;
 
 import java.util.List;
 import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -57,16 +63,19 @@ import javax.servlet.http.HttpServletRequest;
 @Controller( controllerJsp = "ManageGraphs.jsp", controllerPath = "jsp/admin/plugins/graphite/", right = "GRAPHITE_MANAGEMENT" )
 public class GraphJspBean extends ManageGraphJspBean
 {
+
     ////////////////////////////////////////////////////////////////////////////
     // Constants
 
     // templates
-    private static final String TEMPLATE_MANAGE_GRAPHS = "/admin/plugins/graphite/manage_graphs.html";
-    private static final String TEMPLATE_CREATE_GRAPH = "/admin/plugins/graphite/create_graph.html";
-    private static final String TEMPLATE_MODIFY_GRAPH = "/admin/plugins/graphite/modify_graph.html";
+    private static final String TEMPLATE_MANAGE_GRAPHS="/admin/plugins/graphite/manage_graphs.html";
+    private static final String TEMPLATE_CREATE_GRAPH="/admin/plugins/graphite/create_graph.html";
+    private static final String TEMPLATE_MODIFY_GRAPH="/admin/plugins/graphite/modify_graph.html";
+
 
     // Parameters
-    private static final String PARAMETER_ID_GRAPH = "id_graph";
+    private static final String PARAMETER_ID_GRAPH="id_graph";
+
 
     // Properties for page titles
     private static final String PROPERTY_PAGE_TITLE_MANAGE_GRAPHS = "graphite.manage_graphs.pageTitle";
@@ -75,12 +84,16 @@ public class GraphJspBean extends ManageGraphJspBean
 
     // Markers
     private static final String MARK_GRAPH_LIST = "graph_list";
+    private static final String MARK_CATEGORIES_COMBO = "combo_categories";
+    private static final String MARK_GRAPH_CATEGORY = "category";
     private static final String MARK_GRAPH = "graph";
+
     private static final String JSP_MANAGE_GRAPHS = "jsp/admin/plugins/graphite/ManageGraphs.jsp";
 
     // Properties
     private static final String MESSAGE_CONFIRM_REMOVE_GRAPH = "graphite.message.confirmRemoveGraph";
     private static final String PROPERTY_DEFAULT_LIST_GRAPH_PER_PAGE = "graphite.listGraphs.itemsPerPage";
+ 
     private static final String VALIDATION_ATTRIBUTES_PREFIX = "graphite.model.entity.graph.attribute.";
 
     // Views
@@ -98,10 +111,11 @@ public class GraphJspBean extends ManageGraphJspBean
     private static final String INFO_GRAPH_CREATED = "graphite.info.graph.created";
     private static final String INFO_GRAPH_UPDATED = "graphite.info.graph.updated";
     private static final String INFO_GRAPH_REMOVED = "graphite.info.graph.removed";
-
+    
     // Session variable to store working values
     private Graph _graph;
-
+    
+    
     @View( value = VIEW_MANAGE_GRAPHS, defaultView = true )
     public String getManageGraphs( HttpServletRequest request )
     {
@@ -140,6 +154,7 @@ public class GraphJspBean extends ManageGraphJspBean
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_GRAPH, _graph );
+        model.put( MARK_CATEGORIES_COMBO, getComboCategories());
 
         return getPage( PROPERTY_PAGE_TITLE_CREATE_GRAPH, TEMPLATE_CREATE_GRAPH, model );
     }
@@ -222,6 +237,8 @@ public class GraphJspBean extends ManageGraphJspBean
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_GRAPH, _graph );
+        model.put( MARK_GRAPH_CATEGORY, _graph.getGraphCategory() );
+        model.put( MARK_CATEGORIES_COMBO, getComboCategories());
 
         return getPage( PROPERTY_PAGE_TITLE_MODIFY_GRAPH, TEMPLATE_MODIFY_GRAPH, model );
     }
@@ -248,5 +265,18 @@ public class GraphJspBean extends ManageGraphJspBean
         addInfo( INFO_GRAPH_UPDATED, getLocale(  ) );
 
         return redirectView( request, VIEW_MANAGE_GRAPHS );
+    }
+    
+    public static ReferenceList getComboCategories()
+    {
+        ReferenceList list = new ReferenceList(  );
+        List<Category> listCategorys = (List<Category>) CategoryHome.getCategorysList(  );
+        
+        for ( Category c : listCategorys)
+        {
+            list.addItem( c.getIdCategory(  ), c.getCategoryTitle(  ) );
+        }
+        
+        return list;
     }
 }

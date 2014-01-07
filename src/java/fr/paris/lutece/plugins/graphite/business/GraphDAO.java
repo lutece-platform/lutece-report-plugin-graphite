@@ -7,15 +7,15 @@
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
- *         and the following disclaimer.
+ *	 and the following disclaimer.
  *
  *  2. Redistributions in binary form must reproduce the above copyright notice
- *         and the following disclaimer in the documentation and/or other materials
- *         provided with the distribution.
+ *	 and the following disclaimer in the documentation and/or other materials
+ *	 provided with the distribution.
  *
  *  3. Neither the name of 'Mairie de Paris' nor 'Lutece' nor the names of its
- *         contributors may be used to endorse or promote products derived from
- *         this software without specific prior written permission.
+ *	 contributors may be used to endorse or promote products derived from
+ *	 this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -31,6 +31,8 @@
  *
  * License 1.0
  */
+
+
 package fr.paris.lutece.plugins.graphite.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
@@ -43,137 +45,156 @@ import java.util.Collection;
 /**
  * This class provides Data Access methods for Graph objects
  */
+
 public final class GraphDAO implements IGraphDAO
 {
-    // Constants
-    private static final String SQL_QUERY_NEW_PK = "SELECT max( id_graph ) FROM graphite_graph";
-    private static final String SQL_QUERY_SELECT = "SELECT id_graph, graph_title, graph_url, graph_order FROM graphite_graph WHERE id_graph = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO graphite_graph ( id_graph, graph_title, graph_url, graph_order ) VALUES ( ?, ?, ?, ? ) ";
-    private static final String SQL_QUERY_DELETE = "DELETE FROM graphite_graph WHERE id_graph = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE graphite_graph SET id_graph = ?, graph_title = ?, graph_url = ?, graph_order = ? WHERE id_graph = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_graph, graph_title, graph_url, graph_order FROM graphite_graph";
+	
+	// Constants
+	private static final String SQL_QUERY_NEW_PK = "SELECT max( id_graph ) FROM graphite_graph";
+	private static final String SQL_QUERY_SELECT = "SELECT id_graph, graph_title, graph_url, graph_order, graph_category, graph_comment FROM graphite_graph WHERE id_graph = ?";
+	private static final String SQL_QUERY_INSERT = "INSERT INTO graphite_graph ( id_graph, graph_title, graph_url, graph_order, graph_category, graph_comment ) VALUES ( ?, ?, ?, ?, ?, ? ) ";
+	private static final String SQL_QUERY_DELETE = "DELETE FROM graphite_graph WHERE id_graph = ? ";
+	private static final String SQL_QUERY_UPDATE = "UPDATE graphite_graph SET id_graph = ?, graph_title = ?, graph_url = ?, graph_order = ?, graph_category = ?, graph_comment = ? WHERE id_graph = ?";
+	private static final String SQL_QUERY_SELECTALL = "SELECT id_graph, graph_title, graph_url, graph_order, graph_category, graph_comment FROM graphite_graph";
 
-    /**
-     * Generates a new primary key
-     * @param plugin The Plugin
-     * @return The new primary key
-     */
-    public int newPrimaryKey( Plugin plugin )
-    {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK, plugin );
-        daoUtil.executeQuery(  );
 
-        int nKey = 1;
+	
+	/**
+	 * Generates a new primary key
+	 * @param plugin The Plugin
+	 * @return The new primary key
+	 */
+	public int newPrimaryKey( Plugin plugin)
+	{
+		DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK , plugin  );
+		daoUtil.executeQuery( );
 
-        if ( daoUtil.next(  ) )
-        {
-            nKey = daoUtil.getInt( 1 ) + 1;
-        }
+		int nKey = 1;
 
-        daoUtil.free(  );
+		if( daoUtil.next( ) )
+		{
+			nKey = daoUtil.getInt( 1 ) + 1;
+		}
 
-        return nKey;
-    }
+		daoUtil.free();
 
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public void insert( Graph graph, Plugin plugin )
-    {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
+		return nKey;
+	}
 
-        graph.setIdGraph( newPrimaryKey( plugin ) );
 
-        daoUtil.setInt( 1, graph.getIdGraph(  ) );
-        daoUtil.setString( 2, graph.getGraphTitle(  ) );
-        daoUtil.setString( 3, graph.getGraphUrl(  ) );
-        daoUtil.setInt( 4, graph.getGraphOrder(  ) );
 
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
-    }
 
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Graph load( int nKey, Plugin plugin )
-    {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
-        daoUtil.setInt( 1, nKey );
-        daoUtil.executeQuery(  );
+	/**
+	 * {@inheritDoc }
+	 */
+	@Override
+	public void insert( Graph graph, Plugin plugin )
+	{
+		DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
+				
+		graph.setIdGraph( newPrimaryKey( plugin ) );
+				
+		daoUtil.setInt( 1, graph.getIdGraph( ) );
+		daoUtil.setString( 2, graph.getGraphTitle( ) );
+		daoUtil.setString( 3, graph.getGraphUrl( ) );
+		daoUtil.setInt( 4, graph.getGraphOrder( ) );
+		daoUtil.setString( 5, graph.getGraphCategory( ) );
+		daoUtil.setString( 6, graph.getGraphComment( ) );
 
-        Graph graph = null;
+		daoUtil.executeUpdate( );
+		daoUtil.free( );
+	}
 
-        if ( daoUtil.next(  ) )
-        {
-            graph = new Graph(  );
-            graph.setIdGraph( daoUtil.getInt( 1 ) );
-            graph.setGraphTitle( daoUtil.getString( 2 ) );
-            graph.setGraphUrl( daoUtil.getString( 3 ) );
-            graph.setGraphOrder( daoUtil.getInt( 4 ) );
-        }
 
-        daoUtil.free(  );
+	/**
+	 * {@inheritDoc }
+	 */
+	@Override
+	public Graph load( int nKey, Plugin plugin )
+	{
+		DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
+		daoUtil.setInt( 1 , nKey );
+		daoUtil.executeQuery( );
 
-        return graph;
-    }
+		Graph graph = null;
 
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public void delete( int nGraphId, Plugin plugin )
-    {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
-        daoUtil.setInt( 1, nGraphId );
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
-    }
+		if ( daoUtil.next( ) )
+		{
+			graph = new Graph();
+			graph.setIdGraph( daoUtil.getInt(  1 ) );
+			graph.setGraphTitle( daoUtil.getString(  2 ) );
+			graph.setGraphUrl( daoUtil.getString(  3 ) );
+			graph.setGraphOrder( daoUtil.getInt(  4 ) );
+			graph.setGraphCategory( daoUtil.getString(  5 ) );
+			graph.setGraphComment( daoUtil.getString(  6 ) );
+		}
 
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public void store( Graph graph, Plugin plugin )
-    {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
+		daoUtil.free( );
+		return graph;
+	}
 
-        daoUtil.setInt( 1, graph.getIdGraph(  ) );
-        daoUtil.setString( 2, graph.getGraphTitle(  ) );
-        daoUtil.setString( 3, graph.getGraphUrl(  ) );
-        daoUtil.setInt( 4, graph.getGraphOrder(  ) );
-        daoUtil.setInt( 5, graph.getIdGraph(  ) );
 
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
-    }
+	/**
+	 * {@inheritDoc }
+	 */
+	@Override
+	public void delete( int nGraphId, Plugin plugin )
+	{
+		DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
+		daoUtil.setInt( 1 , nGraphId );
+		daoUtil.executeUpdate( );
+		daoUtil.free( );
+	}
 
-    /**
-     * {@inheritDoc }
-     */
-    @Override
-    public Collection<Graph> selectGraphsList( Plugin plugin )
-    {
-        Collection<Graph> graphList = new ArrayList<Graph>(  );
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin );
-        daoUtil.executeQuery(  );
 
-        while ( daoUtil.next(  ) )
-        {
-            Graph graph = new Graph(  );
+	/**
+	 * {@inheritDoc }
+	 */
+	@Override
+	public void store( Graph graph, Plugin plugin )
+	{
+		DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
+				
+		daoUtil.setInt( 1, graph.getIdGraph( ) );
+		daoUtil.setString( 2, graph.getGraphTitle( ) );
+		daoUtil.setString( 3, graph.getGraphUrl( ) );
+		daoUtil.setInt( 4, graph.getGraphOrder( ) );
+		daoUtil.setString( 5, graph.getGraphCategory( ) );
+		daoUtil.setString( 6, graph.getGraphComment( ) );
+		daoUtil.setInt( 7, graph.getIdGraph( ) );
+				
+		daoUtil.executeUpdate( );
+		daoUtil.free( );
+	}
 
-            graph.setIdGraph( daoUtil.getInt( 1 ) );
-            graph.setGraphTitle( daoUtil.getString( 2 ) );
-            graph.setGraphUrl( daoUtil.getString( 3 ) );
-            graph.setGraphOrder( daoUtil.getInt( 4 ) );
 
-            graphList.add( graph );
-        }
 
-        daoUtil.free(  );
+	/**
+	 * {@inheritDoc }
+	 */
+	@Override
+	public Collection<Graph> selectGraphsList( Plugin plugin )
+	{
+		Collection<Graph> graphList = new ArrayList<Graph>(  );
+		DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin );
+		daoUtil.executeQuery(  );
 
-        return graphList;
-    }
+		while ( daoUtil.next(  ) )
+		{
+				Graph graph = new Graph(  );
+
+					graph.setIdGraph( daoUtil.getInt( 1 ) );
+					graph.setGraphTitle( daoUtil.getString( 2 ) );
+					graph.setGraphUrl( daoUtil.getString( 3 ) );
+					graph.setGraphOrder( daoUtil.getInt( 4 ) );
+					graph.setGraphCategory( daoUtil.getString( 5 ) );
+					graph.setGraphComment( daoUtil.getString( 6 ) );
+
+				graphList.add( graph );
+		}
+
+		daoUtil.free( );
+		return graphList;
+	}
+
 }

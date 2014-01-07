@@ -1,0 +1,103 @@
+<#include "managegraph_tabs.html" />
+<@tabs tab="category" />
+
+<div class="row" >
+    <div class="span12">
+
+    <form class="form-horizontal" method="post" action="jsp/admin/plugins/graphite/ManageCategorys.jsp">
+        <fieldset>
+            <legend>#i18n{graphite.modify_category.tableLabel}</legend>
+
+            <@messages errors=errors />
+
+
+            <input type="hidden" id="id_category" name="id_category" value="${category.idCategory}"/>
+
+            <div class="control-group">
+                <label class="control-label" for="category_title" >#i18n{graphite.modify_category.labelCategoryTitle} * :</label>
+                <div class="controls">
+                    <input type="text" id="category_title" name="category_title"  maxlength="50" value="${category.categoryTitle}" tabindex="1" />
+                    <span class="help-block">#i18n{graphite.modify_category.labelCategoryTitle.help}</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="category_role" >#i18n{graphite.modify_category.labelCategoryRole} * :</label>
+                <div class="controls">
+                    <select name="category_role" id="category_role">
+                    <#list combo_roles?sort_by('name') as r>
+                        <#if r.name == role>
+                        <option value="${r.name}" selected>${r.name}</option> 
+                        <#else>
+                        <option value="${r.name}">${r.name}</option> 
+                        </#if>
+                    </#list>
+                    </select>
+                    <span class="help-block">#i18n{graphite.modify_category.labelCategoryRole.help}</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="category_workgroup" >#i18n{graphite.modify_category.labelCategoryWorkgroup} * :</label>
+                <div class="controls">
+                    <select name="category_workgroup" id="category_workgroup">
+                    <#list combo_workgroups?sort_by('name') as wg>
+                        <#if wg.name == workgroup>
+                        <option value="${wg.name}" selected>${wg.name}</option> 
+                        <#else>
+                        <option value="${wg.name}">${wg.name}</option> 
+                        </#if>
+                    </#list>
+                    </select>
+                    <span class="help-block">#i18n{graphite.modify_category.labelCategoryWorkgroup.help}</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="display_front" >#i18n{graphite.modify_category.labelDisplayFront} * :</label>
+                <div class="controls">
+                    <select name="display_front" id="display_front">
+                        <#if front == 1>
+                        <option value="1" selected>#i18n{graphite.info.yes}</option>
+                        <option value="0">#i18n{graphite.info.no}</option>
+                        <#else>
+                        <option value="1">#i18n{graphite.info.yes}</option>
+                        <option value="0" selected>#i18n{graphite.info.no}</option>
+                        </#if>
+                    </select>
+                    <span class="help-block">#i18n{graphite.modify_category.labelDisplayFront.help}</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="display_back" >#i18n{graphite.modify_category.labelDisplayBack} * :</label>
+                <div class="controls">
+                    <select name="display_back" id="display_back">
+                        <#if back == 1>
+                        <option value="1" selected>#i18n{graphite.info.yes}</option>
+                        <option value="0">#i18n{graphite.info.no}</option>
+                        <#else>
+                        <option value="1">#i18n{graphite.info.yes}</option>
+                        <option value="0" selected>#i18n{graphite.info.no}</option>
+                        </#if>
+                    </select>
+                    <span class="help-block">#i18n{graphite.modify_category.labelDisplayBack.help}</span>
+                </div>
+            </div>
+
+
+            <div class="form-actions">   
+                <button name="action_modifyCategory" class="btn btn-primary" type="submit" tabindex="6" >
+                    #i18n{portal.util.labelModify}
+                </button>
+                <button name="view_manageCategorys" class="btn" type="submit" >
+                    #i18n{portal.util.labelCancel}
+                </button>	
+            </div>
+
+        </fieldset>
+    </form>
+    </div>  
+
+</div>
+

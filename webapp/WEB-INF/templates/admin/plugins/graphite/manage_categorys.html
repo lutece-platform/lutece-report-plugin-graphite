@@ -1,0 +1,68 @@
+<#include "managegraph_tabs.html" />
+<@tabs tab="category" />
+
+<div class="row-fluid" >
+    <div class="span12">
+
+        <@messages infos=infos />
+
+        <form method="post"  action="jsp/admin/plugins/graphite/ManageCategorys.jsp">
+            <button name="view_createCategory" class="btn btn-primary pull-right" type="submit">
+                <i class="icon-plus icon-white"></i>
+                #i18n{graphite.manage_categorys.buttonAdd}
+            </button>
+        </form>
+
+    <h4>#i18n{graphite.manage_categorys.tableLabel}</h4>    
+
+    <@paginationAdmin paginator=paginator combo=1 />
+    
+    <table class="table table-condensed table-striped">
+        <tr>
+                    <input type="hidden" id="id_category" name="id_category"  />
+                    <th>#i18n{graphite.manage_categorys.columnCategoryTitle}</th>
+                    <th>#i18n{graphite.manage_categorys.columnCategoryRole}</th>
+                    <th>#i18n{graphite.manage_categorys.columnCategoryWorkgroup}</th>
+                    <th>#i18n{graphite.manage_categorys.columnDisplayFront}</th>
+                    <th>#i18n{graphite.manage_categorys.columnDisplayBack}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+            <#list category_list as category >
+        <tr>
+                    <input type="hidden" id="id_category" name="id_category"  />
+                    <td>
+                        ${category.categoryTitle}
+                    </td>
+                    <td>
+                        ${category.categoryRole}
+                    </td>
+                    <td>
+                        ${category.categoryWorkgroup}
+                    </td>
+                    <td>
+                        ${category.displayFront}
+                    </td>
+                    <td>
+                        ${category.displayBack}
+                    </td>
+        <td>
+            <a href="jsp/admin/plugins/graphite/ManageCategorys.jsp?view=modifyCategory&id_category=${category.idCategory}"
+               class="btn btn-primary btn-small" title="#i18n{portal.util.labelModify}">
+                <i class="icon-edit icon-white"></i>
+            </a>
+
+            <a href="jsp/admin/plugins/graphite/ManageCategorys.jsp?action=confirmRemoveCategory&id_category=${category.idCategory}"
+               class="btn btn-danger btn-small" title="#i18n{portal.util.labelDelete}" >
+                <i class="icon-trash icon-white"></i>
+            </a>
+        </td>
+        </tr>
+        </#list>
+    </table>
+
+    <@paginationAdmin paginator=paginator />
+
+    </div>
+</div>
+
+

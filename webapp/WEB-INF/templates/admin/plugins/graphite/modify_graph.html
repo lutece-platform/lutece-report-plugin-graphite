@@ -16,7 +16,7 @@
             <div class="control-group">
                 <label class="control-label" for="graph_title" >#i18n{graphite.modify_graph.labelGraphTitle} * :</label>
                 <div class="controls">
-                    <input type="text" id="graph_title" name="graph_title" maxlength="50" value="${graph.graphTitle}" tabindex="1" />
+                    <input type="text" id="graph_title" name="graph_title"  maxlength="50" value="${graph.graphTitle}" tabindex="1" />
                     <span class="help-block">#i18n{graphite.modify_graph.labelGraphTitle.help}</span>
                 </div>
             </div>
@@ -24,7 +24,7 @@
             <div class="control-group">
                 <label class="control-label" for="graph_url" >#i18n{graphite.modify_graph.labelGraphUrl} * :</label>
                 <div class="controls">
-                    <input type="text" id="graph_url" name="graph_url" maxlength="500" value="${graph.graphUrl}" tabindex="1" />
+                    <input type="text" id="graph_url" name="graph_url"  maxlength="255" value="${graph.graphUrl}" tabindex="1" />
                     <span class="help-block">#i18n{graphite.modify_graph.labelGraphUrl.help}</span>
                 </div>
             </div>
@@ -32,14 +32,38 @@
             <div class="control-group">
                 <label class="control-label" for="graph_order" >#i18n{graphite.modify_graph.labelGraphOrder} * :</label>
                 <div class="controls">
-                    <input type="text" id="graph_order" name="graph_order" maxlength="3" value="${graph.graphOrder}" tabindex="1" />
+                    <input type="text" id="graph_order" name="graph_order"  value="${graph.graphOrder}" tabindex="1" />
                     <span class="help-block">#i18n{graphite.modify_graph.labelGraphOrder.help}</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="graph_category" >#i18n{graphite.modify_graph.labelGraphCategory} * :</label>
+                <div class="controls">
+                    <select name="graph_category" id="graph_category">
+                    <#list combo_categories?sort_by('name') as c>
+                        <#if c.name == category>
+                        <option value="${c.name}" selected>${c.name}</option> 
+                        <#else>
+                        <option value="${c.name}">${c.name}</option>
+                        </#if>
+                    </#list>
+                    </select>
+                    <span class="help-block">#i18n{graphite.modify_graph.labelGraphCategory.help}</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="graph_comment" >#i18n{graphite.modify_graph.labelGraphComment} * :</label>
+                <div class="controls">
+                    <input type="text" id="graph_comment" name="graph_comment"  maxlength="255" value="${graph.graphComment}" tabindex="1" />
+                    <span class="help-block">#i18n{graphite.modify_graph.labelGraphComment.help}</span>
                 </div>
             </div>
 
 
             <div class="form-actions">   
-                <button name="action_modifyGraph" class="btn btn-primary" type="submit" tabindex="4" >
+                <button name="action_modifyGraph" class="btn btn-primary" type="submit" tabindex="6" >
                     #i18n{portal.util.labelModify}
                 </button>
                 <button name="view_manageGraphs" class="btn" type="submit" >

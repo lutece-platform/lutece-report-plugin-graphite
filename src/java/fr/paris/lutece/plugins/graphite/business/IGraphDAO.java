@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2002-2013, Mairie de Paris
  * All rights reserved.
@@ -7,15 +8,15 @@
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
- *         and the following disclaimer.
+ *	 and the following disclaimer.
  *
  *  2. Redistributions in binary form must reproduce the above copyright notice
- *         and the following disclaimer in the documentation and/or other materials
- *         provided with the distribution.
+ *	 and the following disclaimer in the documentation and/or other materials
+ *	 provided with the distribution.
  *
  *  3. Neither the name of 'Mairie de Paris' nor 'Lutece' nor the names of its
- *         contributors may be used to endorse or promote products derived from
- *         this software without specific prior written permission.
+ *	 contributors may be used to endorse or promote products derived from
+ *	 this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -31,11 +32,12 @@
  *
  * License 1.0
  */
+ 
 package fr.paris.lutece.plugins.graphite.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
-
 import java.util.Collection;
+
 
 
 /**
@@ -43,42 +45,51 @@ import java.util.Collection;
  */
 public interface IGraphDAO
 {
-    /**
-     * Insert a new record in the table.
-     * @param graph instance of the Graph object to insert
-     * @param plugin the Plugin
-     */
-    void insert( Graph graph, Plugin plugin );
 
-    /**
-     * Update the record in the table
-     * @param graph the reference of the Graph
-     * @param plugin the Plugin
-     */
-    void store( Graph graph, Plugin plugin );
 
-    /**
-     * Delete a record from the table
-     * @param nIdGraph int identifier of the Graph to delete
-     * @param plugin the Plugin
-     */
-    void delete( int nIdGraph, Plugin plugin );
+	/**
+	 * Insert a new record in the table.
+	 * @param graph instance of the Graph object to insert
+	 * @param plugin the Plugin
+	 */
+	void insert( Graph graph, Plugin plugin );
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Finders
 
-    /**
-     * Load the data from the table
-     * @param nKey The identifier of the graph
-     * @param plugin the Plugin
-     * @return The instance of the graph
-     */
-    Graph load( int nKey, Plugin plugin );
 
-    /**
-     * Load the data of all the graph objects and returns them as a collection
-     * @param plugin the Plugin
-     * @return The collection which contains the data of all the graph objects
-     */
-    Collection<Graph> selectGraphsList( Plugin plugin );
+	/**
+	 * Update the record in the table
+	 * @param graph the reference of the Graph
+	 * @param plugin the Plugin
+	 */
+	void store( Graph graph, Plugin plugin );
+
+
+	/**
+	 * Delete a record from the table
+	 * @param nIdGraph int identifier of the Graph to delete
+	 * @param plugin the Plugin
+	 */
+	void delete( int nIdGraph, Plugin plugin );
+
+	///////////////////////////////////////////////////////////////////////////
+	// Finders
+
+	/**
+	 * Load the data from the table
+	 * @param nKey The identifier of the graph
+	 * @param plugin the Plugin
+	 * @return The instance of the graph
+	 */
+	Graph load( int nKey, Plugin plugin );
+
+
+
+	/**
+	 * Load the data of all the graph objects and returns them as a collection
+	 * @param plugin the Plugin
+	 * @return The collection which contains the data of all the graph objects
+	 */
+	Collection<Graph> selectGraphsList( Plugin plugin );
+	
 }
+

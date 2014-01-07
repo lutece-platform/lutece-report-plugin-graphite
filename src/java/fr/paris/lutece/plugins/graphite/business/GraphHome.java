@@ -7,15 +7,15 @@
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
- *         and the following disclaimer.
+ *	 and the following disclaimer.
  *
  *  2. Redistributions in binary form must reproduce the above copyright notice
- *         and the following disclaimer in the documentation and/or other materials
- *         provided with the distribution.
+ *	 and the following disclaimer in the documentation and/or other materials
+ *	 provided with the distribution.
  *
  *  3. Neither the name of 'Mairie de Paris' nor 'Lutece' nor the names of its
- *         contributors may be used to endorse or promote products derived from
- *         this software without specific prior written permission.
+ *	 contributors may be used to endorse or promote products derived from
+ *	 this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -31,83 +31,90 @@
  *
  * License 1.0
  */
+ 
 package fr.paris.lutece.plugins.graphite.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.plugin.PluginService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
-
 import java.util.Collection;
-
 
 /**
  * This class provides instances management methods (create, find, ...) for Graph objects
  */
+
 public final class GraphHome
 {
-    // Static variable pointed at the DAO instance
-    private static IGraphDAO _dao = SpringContextService.getBean( "graphite.graphDAO" );
-    private static Plugin _plugin = PluginService.getPlugin( "graphite" );
 
-    /**
-     * Private constructor - this class need not be instantiated
-     */
-    private GraphHome(  )
-    {
-    }
+	// Static variable pointed at the DAO instance
 
-    /**
-     * Create an instance of the graph class
-     * @param graph The instance of the Graph which contains the informations to store
-     * @return The  instance of graph which has been created with its primary key.
-     */
-    public static Graph create( Graph graph )
-    {
-        _dao.insert( graph, _plugin );
+	private static IGraphDAO _dao = SpringContextService.getBean( "graphite.graphDAO" );
+	private static Plugin _plugin = PluginService.getPlugin( "graphite" );
 
-        return graph;
-    }
+	/**
+	 * Private constructor - this class need not be instantiated
+	 */
+	private GraphHome(  )
+	{
+	}
 
-    /**
-     * Update of the graph which is specified in parameter
-     * @param graph The instance of the Graph which contains the data to store
-     * @return The instance of the  graph which has been updated
-     */
-    public static Graph update( Graph graph )
-    {
-        _dao.store( graph, _plugin );
+	/**
+	 * Create an instance of the graph class
+	 * @param graph The instance of the Graph which contains the informations to store
+	 * @return The  instance of graph which has been created with its primary key.
+	 */
+	public static Graph create( Graph graph )
+	{
+		_dao.insert( graph, _plugin );
 
-        return graph;
-    }
+		return graph;
+	}
 
-    /**
-     * Remove the graph whose identifier is specified in parameter
-     * @param nGraphId The graph Id
-     */
-    public static void remove( int nGraphId )
-    {
-        _dao.delete( nGraphId, _plugin );
-    }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Finders
+	/**
+	 * Update of the graph which is specified in parameter
+	 * @param graph The instance of the Graph which contains the data to store
+	 * @return The instance of the  graph which has been updated
+	 */
+	public static Graph update( Graph graph )
+	{
+		_dao.store( graph, _plugin );
 
-    /**
-     * Returns an instance of a graph whose identifier is specified in parameter
-     * @param nKey The graph primary key
-     * @return an instance of Graph
-     */
-    public static Graph findByPrimaryKey( int nKey )
-    {
-        return _dao.load( nKey, _plugin );
-    }
+		return graph;
+	}
 
-    /**
-     * Load the data of all the graph objects and returns them in form of a collection
-     * @return the collection which contains the data of all the graph objects
-     */
-    public static Collection<Graph> getGraphsList(  )
-    {
-        return _dao.selectGraphsList( _plugin );
-    }
+
+	/**
+	 * Remove the graph whose identifier is specified in parameter
+	 * @param nGraphId The graph Id
+	 */
+	public static void remove( int nGraphId )
+	{
+		_dao.delete( nGraphId, _plugin );
+	}
+
+
+	///////////////////////////////////////////////////////////////////////////
+	// Finders
+
+	/**
+	 * Returns an instance of a graph whose identifier is specified in parameter
+	 * @param nKey The graph primary key
+	 * @return an instance of Graph
+	 */
+	public static Graph findByPrimaryKey( int nKey )
+	{
+		return _dao.load( nKey, _plugin);
+	}
+
+
+	/**
+	 * Load the data of all the graph objects and returns them in form of a collection
+	 * @return the collection which contains the data of all the graph objects
+	 */
+	public static Collection<Graph> getGraphsList( )
+	{
+		return _dao.selectGraphsList( _plugin );
+	}
 }
+
