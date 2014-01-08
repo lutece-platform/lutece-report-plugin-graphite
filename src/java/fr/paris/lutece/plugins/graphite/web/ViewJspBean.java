@@ -59,7 +59,7 @@ public class ViewJspBean extends ViewGraphJspBean
  
     @View( value = VIEW_HOME , defaultView = true )
     public String viewHome( HttpServletRequest request )
-    {
+    { 
         Map<String, Object> model = getModel();
         model.put( MARKER_GRAPHS_LIST, GraphHome.getGraphsList(  ) );
 
