@@ -33,14 +33,21 @@
  */
 package fr.paris.lutece.plugins.graphite.web;
 
+import fr.paris.lutece.plugins.graphite.business.Category;
+import fr.paris.lutece.plugins.graphite.business.CategoryHome;
 import fr.paris.lutece.plugins.graphite.business.GraphHome;
+import fr.paris.lutece.portal.service.security.SecurityService;
 import fr.paris.lutece.portal.web.xpages.XPage;
 import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.annotations.Controller;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * This class provides a simple implementation of an XPage
@@ -50,9 +57,15 @@ import javax.servlet.http.HttpServletRequest;
 public class graphite extends MVCApplication
 {
     private static final String TEMPLATE_XPAGE = "/skin/plugins/graphite/graphite.html";
-    private static final String MARKER_GRAPHS_LIST = "graphs_list";
     private static final String VIEW_HOME = "home";
-
+    
+    private static final String MARK_CATEGORIES_COMBO = "combo_categories";
+    private static final String MARK_CATEGORY = "categorie";
+    
+    private static final String MARKER_GRAPHS_LIST = "graphs_list";
+    private static final String MARKER_ROLE = "role";
+    
+    private Category _category;
     /**
      * Returns the content of the page graphite.
      * @param request The HTTP request
@@ -61,9 +74,61 @@ public class graphite extends MVCApplication
     @View( value = VIEW_HOME, defaultView = true )
     public XPage viewHome( HttpServletRequest request )
     {
+        
+        String strIdCategory = request.getParameter( "category" );
+        int nId =-1;
+        boolean isRole = true;
+        List<Category> listCategory = new ArrayList<Category>(  );
+        
+        if(!StringUtils.isEmpty(strIdCategory))
+        {
+            nId = Integer.parseInt( strIdCategory );
+        }
+       else
+       {
+           //default category
+           List<Category> listCategories = getComboCategories();
+           if(!CollectionUtils.isEmpty(listCategories))
+           {
+               nId=listCategories.get(0).getIdCategory();
+           }
+        }
+        _category = CategoryHome.findByPrimaryKey( nId );
+        
+        if(SecurityService.isAuthenticationEnable())
+        {
+            isRole = SecurityService.getInstance().isUserInRole(request, _category.getCategoryRole());
+            for ( Category c : getComboCategories())
+            {
+                if(SecurityService.getInstance().isUserInRole(request, c.getCategoryRole()))
+                listCategory.add( c );
+            }
+        }
+        else
+        {
+            for ( Category c : getComboCategories())
+            {
+                listCategory.add( c );
+            }
+        }
+        
         Map<String, Object> model = getModel(  );
+        model.put( MARK_CATEGORY, _category);
         model.put( MARKER_GRAPHS_LIST, GraphHome.getGraphsList(  ) );
-
+        model.put( MARK_CATEGORIES_COMBO, listCategory);
+        model.put( MARKER_ROLE, isRole);
+        
         return getXPage( TEMPLATE_XPAGE, request.getLocale(  ), model );
+    }
+    
+    /**
+    * Returns the categories
+    * @return the categories
+    */
+    public List<Category> getComboCategories()
+    {
+        List<Category> listCategorys = (List<Category>) CategoryHome.getCategorysList(  );
+        
+        return listCategorys;
     }
 }

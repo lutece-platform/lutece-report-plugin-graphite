@@ -97,7 +97,7 @@ public final class CategoryDAO implements ICategoryDAO
 		daoUtil.setInt( 1, category.getIdCategory( ) );
 		daoUtil.setString( 2, category.getCategoryTitle( ) );
 		daoUtil.setString( 3, category.getCategoryRole( ) );
-		daoUtil.setString( 4, category.getCategoryWorkgroup( ) );
+		daoUtil.setString( 4, category.getWorkgroup( ) );
 		daoUtil.setInt( 5, category.getDisplayFront( ) );
 		daoUtil.setInt( 6, category.getDisplayBack( ) );
 
@@ -158,7 +158,7 @@ public final class CategoryDAO implements ICategoryDAO
 		daoUtil.setInt( 1, category.getIdCategory( ) );
 		daoUtil.setString( 2, category.getCategoryTitle( ) );
 		daoUtil.setString( 3, category.getCategoryRole( ) );
-		daoUtil.setString( 4, category.getCategoryWorkgroup( ) );
+		daoUtil.setString( 4, category.getWorkgroup( ) );
 		daoUtil.setInt( 5, category.getDisplayFront( ) );
 		daoUtil.setInt( 6, category.getDisplayBack( ) );
 		daoUtil.setInt( 7, category.getIdCategory( ) );

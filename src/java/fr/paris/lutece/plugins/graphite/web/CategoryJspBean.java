@@ -249,7 +249,7 @@ public class CategoryJspBean extends ManageGraphJspBean
         model.put( MARK_ROLES_COMBO, getComboRoles());
         model.put( MARK_WORKGROUPS_COMBO, getComboWorkGroups());
         model.put( MARK_CATEGORY_ROLE, _category.getCategoryRole() );
-        model.put( MARK_CATEGORY_WORKGROUP, _category.getCategoryWorkgroup() );
+        model.put( MARK_CATEGORY_WORKGROUP, _category.getWorkgroup() );
         model.put( MARK_CATEGORY_FRONT, _category.getDisplayFront() );
         model.put( MARK_CATEGORY_BACK, _category.getDisplayBack() );
 
@@ -280,16 +280,23 @@ public class CategoryJspBean extends ManageGraphJspBean
         return redirectView( request, VIEW_MANAGE_CATEGORYS );
     }
     
+    /**
+    * Returns the roles
+    * @return The roles
+    */
     public ReferenceList getComboRoles()
     {
         return RoleHome.getRolesList();
     }
     
+    /**
+    * Returns the WorkGroups
+    * @return The WorkGroups
+    */
     public ReferenceList getComboWorkGroups()
     {
         AdminUser adminUser = getUser( );
         Locale locale = getLocale( );
-
         return AdminWorkgroupService.getUserWorkgroups( adminUser, locale );
     }
 }

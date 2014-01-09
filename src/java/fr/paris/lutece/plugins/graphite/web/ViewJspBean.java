@@ -35,11 +35,17 @@
  
 package fr.paris.lutece.plugins.graphite.web;
 
+import fr.paris.lutece.plugins.graphite.business.Category;
+import fr.paris.lutece.plugins.graphite.business.CategoryHome;
 import fr.paris.lutece.plugins.graphite.business.GraphHome;
+import fr.paris.lutece.portal.service.workgroup.AdminWorkgroupService;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 
 
 
@@ -54,15 +60,54 @@ public class ViewJspBean extends ViewGraphJspBean
     // Constants
     private static final String TEMPLATE_PAGE = "/admin/plugins/graphite/graphite.html";
     private static final String PROPERTY_PAGE_TITLE_VIEW_GRAPHS = "graphite.view_graphs.pageTitle";
-    private static final String MARKER_GRAPHS_LIST = "graphs_list";
     private static final String VIEW_HOME = "home";
+    
+    private static final String MARK_CATEGORIES_COMBO = "combo_categories";
+    private static final String MARK_CATEGORY = "categorie";
+    
+    private static final String MARKER_GRAPHS_LIST = "graphs_list";
+    private static final String MARKER_WORKGROUP = "workgroup";
+            
+    private Category _category;
  
     @View( value = VIEW_HOME , defaultView = true )
     public String viewHome( HttpServletRequest request )
-    { 
-        Map<String, Object> model = getModel();
+    {
+        String strIdCategory = request.getParameter( "category" );
+        int nId =-1;
+        
+        if(!StringUtils.isEmpty(strIdCategory))
+        {
+            nId = Integer.parseInt( strIdCategory );
+        }
+       else
+       {
+           //default category
+           List<Category> listCategories = getComboCategories();
+           if(!CollectionUtils.isEmpty(listCategories))
+           {
+               nId=listCategories.get(0).getIdCategory();
+           }
+        }
+        
+        _category = CategoryHome.findByPrimaryKey( nId );
+        Map<String, Object> model = getModel(  );
+        model.put( MARK_CATEGORY, _category);
         model.put( MARKER_GRAPHS_LIST, GraphHome.getGraphsList(  ) );
+        model.put( MARK_CATEGORIES_COMBO, AdminWorkgroupService.getAuthorizedCollection(getComboCategories(), getUser()));
+        model.put( MARKER_WORKGROUP, AdminWorkgroupService.isAuthorized(_category, getUser()));
 
         return getPage( PROPERTY_PAGE_TITLE_VIEW_GRAPHS, TEMPLATE_PAGE, model );
+    }
+    
+    /**
+    * Returns the categories
+    * @return the categories
+    */
+    public List<Category> getComboCategories()
+    {
+        List<Category> listCategorys = (List<Category>) CategoryHome.getCategorysList(  );
+        
+        return listCategorys;
     }
 }

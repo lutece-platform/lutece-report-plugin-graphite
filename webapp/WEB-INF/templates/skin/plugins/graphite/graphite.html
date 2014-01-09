@@ -1,16 +1,44 @@
+<#if categorie??>
 <div class="row">
-
     <div class="well hero">
         <h1>Graphiques <small>powered by Graphite</small></h1>
     </div>
-
-
-    <#list graphs_list as graph>
+    
+    <div>
+        <ul class="nav nav-tabs">
+            <#list combo_categories?sort_by('categoryTitle') as category>
+                <#if category.displayFront == 1>
+                    <li <#if category.idCategory == categorie.idCategory>class="active"</#if>>
+                        <a href="jsp/site/Portal.jsp?page=graphite&view=viewHome&category=${category.idCategory}">
+                            ${category.categoryTitle}
+                        </a>
+                    </li>
+                </#if>
+            </#list>
+        </ul>
+    </div>
+    
+    <#if role>   
+    <#list categorie.graphs as graph>
     <div class="span5 well">
         <h2>${graph.graphTitle}</h2>
         <img src="${graph.graphUrl}" alt="graph powered by Graphite"/>
         <h5>${graph.graphComment}</h5>
     </div>
     </#list>
+    <#else>
+    <div class="row">
+        <div class="span5 well">
+            #i18n{graphite.info.category.empty}
+        </div>
+    </div>
+    </#if>
 
 </div>
+<#else>
+<div class="row">
+    <div class="span5 well">
+        #i18n{graphite.info.graph.empty}
+    </div>
+</div>
+</#if>

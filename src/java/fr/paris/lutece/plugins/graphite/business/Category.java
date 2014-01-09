@@ -33,6 +33,9 @@
  */ 
 package fr.paris.lutece.plugins.graphite.business;
 
+import fr.paris.lutece.portal.service.workgroup.AdminWorkgroupResource;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 
@@ -40,7 +43,7 @@ import org.hibernate.validator.constraints.*;
 /**
  * This is the business class for the object Category
  */ 
-public class Category
+public class Category implements AdminWorkgroupResource
 {
 	// Variables declarations 
         
@@ -123,7 +126,7 @@ public class Category
 	 * Returns the CategoryWorkgroup
 	 * @return The CategoryWorkgroup
 	 */
-	public String getCategoryWorkgroup()
+	public String getWorkgroup()
 	{
 		return _strCategoryWorkgroup;
 	}
@@ -170,4 +173,23 @@ public class Category
 	{
 		_nDisplayBack = nDisplayBack;
 	}
+        
+        /**
+	 * Returns the graphs
+	 * @return The graphs
+	 */
+        public List<Graph> getGraphs()
+        {
+            List<Graph> list = new ArrayList<Graph>(  );
+            List<Graph> listGraphs = (List<Graph>) GraphHome.getGraphsList(  );
+
+            for ( Graph g : listGraphs )
+            {
+                if ( g.getGraphCategory().equals(_strCategoryTitle) )
+                {
+                    list.add( g );
+                }
+            }
+            return list;
+        }
 }

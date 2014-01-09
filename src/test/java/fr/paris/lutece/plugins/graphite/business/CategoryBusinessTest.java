@@ -69,7 +69,7 @@ public class CategoryBusinessTest extends LuteceTestCase
         assertEquals( categoryStored.getIdCategory() , category.getIdCategory() );
         assertEquals( categoryStored.getCategoryTitle() , category.getCategoryTitle() );
         assertEquals( categoryStored.getCategoryRole() , category.getCategoryRole() );
-        assertEquals( categoryStored.getCategoryWorkgroup() , category.getCategoryWorkgroup() );
+        assertEquals( categoryStored.getWorkgroup() , category.getWorkgroup() );
         assertEquals( categoryStored.getDisplayFront() , category.getDisplayFront() );
         assertEquals( categoryStored.getDisplayBack() , category.getDisplayBack() );
 
@@ -85,7 +85,7 @@ public class CategoryBusinessTest extends LuteceTestCase
         assertEquals( categoryStored.getIdCategory() , category.getIdCategory() );
         assertEquals( categoryStored.getCategoryTitle() , category.getCategoryTitle() );
         assertEquals( categoryStored.getCategoryRole() , category.getCategoryRole() );
-        assertEquals( categoryStored.getCategoryWorkgroup() , category.getCategoryWorkgroup() );
+        assertEquals( categoryStored.getWorkgroup() , category.getWorkgroup() );
         assertEquals( categoryStored.getDisplayFront() , category.getDisplayFront() );
         assertEquals( categoryStored.getDisplayBack() , category.getDisplayBack() );
 

@@ -267,6 +267,10 @@ public class GraphJspBean extends ManageGraphJspBean
         return redirectView( request, VIEW_MANAGE_GRAPHS );
     }
     
+    /**
+    * Returns a referenceList of the categories
+    * @return a referenceList of the categories
+    */
     public static ReferenceList getComboCategories()
     {
         ReferenceList list = new ReferenceList(  );
@@ -276,7 +280,6 @@ public class GraphJspBean extends ManageGraphJspBean
         {
             list.addItem( c.getIdCategory(  ), c.getCategoryTitle(  ) );
         }
-        
         return list;
     }
 }
