@@ -1,0 +1,16 @@
+<#macro tabs tab >
+<div>
+    <ul class="nav nav-tabs">
+        <li <#if tab="category">class="active"</#if>>
+            <a href="jsp/admin/plugins/graphite/ManageCategorys.jsp">
+                #i18n{graphite.manage_categorys.pageTitle}
+            </a>
+        </li>
+        <li <#if tab="graph">class="active"</#if>>
+            <a href="jsp/admin/plugins/graphite/ManageGraphs.jsp">
+                #i18n{graphite.manage_graphs.pageTitle}
+            </a>
+        </li>
+    </ul>
+</div>
+</#macro>

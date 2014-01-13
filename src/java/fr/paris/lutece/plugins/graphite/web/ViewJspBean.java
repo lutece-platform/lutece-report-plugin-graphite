@@ -32,7 +32,7 @@
  * License 1.0
  */
 
- 
+
 package fr.paris.lutece.plugins.graphite.web;
 
 import fr.paris.lutece.plugins.graphite.business.Category;

@@ -115,7 +115,6 @@ public class GraphJspBean extends ManageGraphJspBean
     // Session variable to store working values
     private Graph _graph;
     
-    
     @View( value = VIEW_MANAGE_GRAPHS, defaultView = true )
     public String getManageGraphs( HttpServletRequest request )
     {
