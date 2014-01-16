@@ -75,28 +75,44 @@ public class ViewJspBean extends ViewGraphJspBean
     {
         String strIdCategory = request.getParameter( "category" );
         int nId =-1;
-        
+
         if(!StringUtils.isEmpty(strIdCategory))
         {
             nId = Integer.parseInt( strIdCategory );
         }
-       else
-       {
-           //default category
-           List<Category> listCategories = getComboCategories();
-           if(!CollectionUtils.isEmpty(listCategories))
-           {
-               nId=listCategories.get(0).getIdCategory();
-           }
+        else
+        {
+            //default category
+            List<Category> listCategories = getComboCategories();
+            if(!CollectionUtils.isEmpty(listCategories))
+            {
+                boolean find = false;
+                for(Category c : listCategories)
+                {
+                    if(find == false)
+                    {
+                        if(c.getDisplayBack() == 1)
+                        {
+                            nId=c.getIdCategory();
+                            find = true;
+                        }
+                    }
+                }
+                if(find == false)
+                {
+                    nId=listCategories.get(0).getIdCategory();
+                }
+            }
         }
-        
-        _category = CategoryHome.findByPrimaryKey( nId );
         Map<String, Object> model = getModel(  );
-        model.put( MARK_CATEGORY, _category);
-        model.put( MARKER_GRAPHS_LIST, GraphHome.getGraphsList(  ) );
-        model.put( MARK_CATEGORIES_COMBO, AdminWorkgroupService.getAuthorizedCollection(getComboCategories(), getUser()));
-        model.put( MARKER_WORKGROUP, AdminWorkgroupService.isAuthorized(_category, getUser()));
-
+        if (nId != -1)
+        {
+            _category = CategoryHome.findByPrimaryKey( nId );
+            model.put( MARK_CATEGORY, _category);
+            model.put( MARKER_GRAPHS_LIST, GraphHome.getGraphsList(  ) );
+            model.put( MARK_CATEGORIES_COMBO, AdminWorkgroupService.getAuthorizedCollection(getComboCategories(), getUser()));
+            model.put( MARKER_WORKGROUP, AdminWorkgroupService.isAuthorized(_category, getUser()));
+        }
         return getPage( PROPERTY_PAGE_TITLE_VIEW_GRAPHS, TEMPLATE_PAGE, model );
     }
     

@@ -72,7 +72,7 @@ public class CategoryBusinessTest extends LuteceTestCase
         assertEquals( categoryStored.getWorkgroup() , category.getWorkgroup() );
         assertEquals( categoryStored.getDisplayFront() , category.getDisplayFront() );
         assertEquals( categoryStored.getDisplayBack() , category.getDisplayBack() );
-
+        
         // Update test
         category.setIdCategory( IDCATEGORY2 );
         category.setCategoryTitle( CATEGORYTITLE2 );

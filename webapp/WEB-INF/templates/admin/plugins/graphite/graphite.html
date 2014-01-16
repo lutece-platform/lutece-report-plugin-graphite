@@ -19,6 +19,7 @@
     </div>
     
     <#if workgroup>  
+    <#if categorie.displayBack == 1>
     <#list categorie.graphs as graph>
     <div class="span5 well">
         <h2>${graph.graphTitle}</h2>
@@ -32,6 +33,7 @@
             #i18n{graphite.info.category.empty}
         </div>
     </div>
+    </#if>
     </#if>
 
 </div>

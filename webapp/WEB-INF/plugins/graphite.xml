@@ -21,7 +21,7 @@
             <feature-title>graphite.adminFeature.ManageGraph.name</feature-title>
             <feature-description>graphite.adminFeature.ManageGraph.description</feature-description>
             <feature-level>0</feature-level>
-            <feature-url>jsp/admin/plugins/graphite/ManageCategorys.jsp</feature-url>
+            <feature-url>jsp/admin/plugins/graphite/ManageGraphs.jsp</feature-url>
             <feature-icon-url></feature-icon-url>
       </admin-feature>
         <admin-feature>
@@ -36,8 +36,8 @@
   	<!-- XPages parameters -->
     <applications>
         <application>
-            <application-id>graphite</application-id>
-            <application-class>fr.paris.lutece.plugins.graphite.web.graphite</application-class>
+            <application-id>Graphite</application-id>
+            <application-class>fr.paris.lutece.plugins.graphite.web.Graphite</application-class>
         </application>
     </applications>
 	<!-- Portlet parameters -->

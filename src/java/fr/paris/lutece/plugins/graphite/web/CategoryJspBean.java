@@ -37,6 +37,8 @@ package fr.paris.lutece.plugins.graphite.web;
 
 import fr.paris.lutece.plugins.graphite.business.Category;
 import fr.paris.lutece.plugins.graphite.business.CategoryHome;
+import fr.paris.lutece.plugins.graphite.business.Graph;
+import fr.paris.lutece.plugins.graphite.business.GraphHome;
 import fr.paris.lutece.portal.business.role.RoleHome;
 import fr.paris.lutece.portal.business.user.AdminUser;
 import fr.paris.lutece.portal.service.message.AdminMessage;
@@ -222,7 +224,16 @@ public class CategoryJspBean extends ManageGraphJspBean
     public String doRemoveCategory( HttpServletRequest request )
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_CATEGORY ) );
+        
+        for(Graph g : GraphHome.getGraphsList())
+        {
+            if(g.getGraphCategory().equals(CategoryHome.findByPrimaryKey( nId ).getCategoryTitle()))
+            {
+                GraphHome.remove(g.getIdGraph());
+            }
+        }
         CategoryHome.remove( nId );
+        
         addInfo( INFO_CATEGORY_REMOVED, getLocale(  ) );
 
         return redirectView( request, VIEW_MANAGE_CATEGORYS );
