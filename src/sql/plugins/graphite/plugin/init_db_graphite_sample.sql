@@ -1,0 +1,6 @@
+INSERT INTO `graphite_category` VALUES
+(1, 'admin', 'admin', 'admin', 1, 1);
+INSERT INTO `graphite_graph` VALUES 
+(1,'Taille des caches Lutece','http://dev.lutece.paris.fr/render/?width=588&height=310&_salt=1387578142.403&from=-60minutes&target=servers.sitedemo.lutece.cache.pageService.memorySize&target=servers.sitedemo.lutece.cache.documentResourceServlet.memorySize&target=servers.sitedemo.lutece.cache.portletService.memorySize&lineMode=connected',1, 'admin', 'La taille des caches Lutece est quasi constante'),
+(2,'Nombre d\'objets dans les caches', 'http://dev.lutece.paris.fr/render/?width=588&height=310&_salt=1388076009.429&target=servers.sitedemo.lutece.cache.datastore.Size&target=servers.sitedemo.lutece.cache.pageService.Size&target=servers.sitedemo.lutece.cache.pageCachingFilter.Size&target=servers.sitedemo.lutece.cache.portletService.Size&target=servers.sitedemo.lutece.cache.staticFilesCachingFilter.Size&target=servers.sitedemo.lutece.cache.xmlTransformerService.Size&from=-60minutes&lineMode=connected',2, 'admin', 'Ce nombre est variant'),
+(3,'Nombre de pages du site', 'http://dev.lutece.paris.fr/render/?width=588&height=310&_salt=1388068431.714&target=servers.sitedemo.lutece.portal.pageCount&from=-45minutes&lineMode=connected',3, 'admin', 'Chaque pic correspond à l\'ajout d\'une page');

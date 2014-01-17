@@ -53,8 +53,6 @@ public class Graph
 	private String _strGraphTitle;
         // @NotEmpty( message = "#i18n{graphite.validation.graph.GraphUrl.notEmpty}" )
         @NotEmpty( message = "#i18n{portal.validation.message.notEmpty}" )
-        // @Size( max = 255 , message = "#i18n{graphite.validation.graph.GraphUrl.size}" ) 
-        @Size( max = 255 , message = "#i18n{portal.validation.message.sizeMax}" ) 
         
 	private String _strGraphUrl;
         
