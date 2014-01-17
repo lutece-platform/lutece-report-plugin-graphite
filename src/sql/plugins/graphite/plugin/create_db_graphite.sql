@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS graphite_graph;
 CREATE TABLE graphite_graph (		
 id_graph int(11) NOT NULL default '0',
 graph_title varchar(50) NOT NULL default '',
-graph_url varchar(255) NOT NULL default '',
+graph_url varchar(1000) NOT NULL default '',
 graph_order int(11) NOT NULL default '0',
 graph_category varchar(255) NOT NULL default '',
 graph_comment varchar(255) NOT NULL default '',
