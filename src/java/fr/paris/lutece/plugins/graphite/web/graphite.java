@@ -53,8 +53,8 @@ import org.apache.commons.lang.StringUtils;
  * This class provides a simple implementation of an XPage
  */
  
-@Controller( xpageName = "graphite" , pageTitleProperty = "graphite.pageTitle" , pagePathProperty = "graphite.pagePathLabel" )
-public class graphite extends MVCApplication
+@Controller( xpageName = "Graphite" , pageTitleProperty = "graphite.pageTitle" , pagePathProperty = "graphite.pagePathLabel" )
+public class Graphite extends MVCApplication
 {
     private static final String TEMPLATE_XPAGE = "/skin/plugins/graphite/graphite.html";
     private static final String VIEW_HOME = "home";
@@ -67,7 +67,7 @@ public class graphite extends MVCApplication
     
     private Category _category;
     /**
-     * Returns the content of the page graphite.
+     * Returns the content of the page Graphite.
      * @param request The HTTP request
      * @return The view
      */
@@ -84,39 +84,60 @@ public class graphite extends MVCApplication
         {
             nId = Integer.parseInt( strIdCategory );
         }
-       else
-       {
-           //default category
-           List<Category> listCategories = getComboCategories();
-           if(!CollectionUtils.isEmpty(listCategories))
-           {
-               nId=listCategories.get(0).getIdCategory();
-           }
-        }
-        _category = CategoryHome.findByPrimaryKey( nId );
-        
-        if(SecurityService.isAuthenticationEnable())
-        {
-            isRole = SecurityService.getInstance().isUserInRole(request, _category.getCategoryRole());
-            for ( Category c : getComboCategories())
-            {
-                if(SecurityService.getInstance().isUserInRole(request, c.getCategoryRole()))
-                listCategory.add( c );
-            }
-        }
         else
         {
-            for ( Category c : getComboCategories())
+            //default category
+            List<Category> listCategories = getComboCategories();
+            if(!CollectionUtils.isEmpty(listCategories))
             {
-                listCategory.add( c );
+                boolean find = false;
+                for(Category c : listCategories)
+                {
+                    if(find == false)
+                    {
+                        if(c.getDisplayFront()== 1)
+                        {
+                            nId=c.getIdCategory();
+                            find = true;
+                        }
+                    }
+                }
+                if(find == false)
+                {
+                    nId=listCategories.get(0).getIdCategory();
+                }
             }
         }
         
         Map<String, Object> model = getModel(  );
-        model.put( MARK_CATEGORY, _category);
-        model.put( MARKER_GRAPHS_LIST, GraphHome.getGraphsList(  ) );
-        model.put( MARK_CATEGORIES_COMBO, listCategory);
-        model.put( MARKER_ROLE, isRole);
+        
+        if (nId != -1)
+        {
+            _category = CategoryHome.findByPrimaryKey( nId );
+
+            if(SecurityService.isAuthenticationEnable())
+            {
+                isRole = SecurityService.getInstance().isUserInRole(request, _category.getCategoryRole());
+                for ( Category c : getComboCategories())
+                {
+                    if(SecurityService.getInstance().isUserInRole(request, c.getCategoryRole()))
+                    listCategory.add( c );
+                }
+            }
+            else
+            {
+                for ( Category c : getComboCategories())
+                {
+                    listCategory.add( c );
+                }
+            }
+
+
+            model.put( MARK_CATEGORY, _category);
+            model.put( MARKER_GRAPHS_LIST, GraphHome.getGraphsList(  ) );
+            model.put( MARK_CATEGORIES_COMBO, listCategory);
+            model.put( MARKER_ROLE, isRole);
+        }
         
         return getXPage( TEMPLATE_XPAGE, request.getLocale(  ), model );
     }
