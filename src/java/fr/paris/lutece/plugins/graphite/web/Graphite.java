@@ -42,6 +42,7 @@ import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.annotations.Controller;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -77,8 +78,6 @@ public class Graphite extends MVCApplication
         
         String strIdCategory = request.getParameter( "category" );
         int nId =-1;
-        boolean isRole = true;
-        List<Category> listCategory = new ArrayList<Category>(  );
         
         if(!StringUtils.isEmpty(strIdCategory))
         {
@@ -87,11 +86,11 @@ public class Graphite extends MVCApplication
         else
         {
             //default category
-            List<Category> listCategories = getComboCategories();
-            if(!CollectionUtils.isEmpty(listCategories))
+            List<Category> listCategorys = getAuthorizedCategory(request);
+            if(!CollectionUtils.isEmpty(listCategorys))
             {
                 boolean find = false;
-                for(Category c : listCategories)
+                for(Category c : listCategorys)
                 {
                     if(find == false)
                     {
@@ -104,7 +103,7 @@ public class Graphite extends MVCApplication
                 }
                 if(find == false)
                 {
-                    nId=listCategories.get(0).getIdCategory();
+                    nId=listCategorys.get(0).getIdCategory();
                 }
             }
         }
@@ -114,29 +113,11 @@ public class Graphite extends MVCApplication
         if (nId != -1)
         {
             _category = CategoryHome.findByPrimaryKey( nId );
-
-            if(SecurityService.isAuthenticationEnable())
-            {
-                isRole = SecurityService.getInstance().isUserInRole(request, _category.getCategoryRole());
-                for ( Category c : getComboCategories())
-                {
-                    if(SecurityService.getInstance().isUserInRole(request, c.getCategoryRole()))
-                    listCategory.add( c );
-                }
-            }
-            else
-            {
-                for ( Category c : getComboCategories())
-                {
-                    listCategory.add( c );
-                }
-            }
-
-
+            
             model.put( MARK_CATEGORY, _category);
             model.put( MARKER_GRAPHS_LIST, GraphHome.getGraphsList(  ) );
-            model.put( MARK_CATEGORIES_COMBO, listCategory);
-            model.put( MARKER_ROLE, isRole);
+            model.put( MARK_CATEGORIES_COMBO, getAuthorizedCategory(request));
+            model.put( MARKER_ROLE, isAuthorized(request, _category));
         }
         
         return getXPage( TEMPLATE_XPAGE, request.getLocale(  ), model );
@@ -151,5 +132,53 @@ public class Graphite extends MVCApplication
         List<Category> listCategorys = (List<Category>) CategoryHome.getCategorysList(  );
         
         return listCategorys;
+    }
+    
+    /**
+    * Returns the Authorized Collection
+    * @return the Authorized Collection
+    */
+    public List<Category> getAuthorizedCategory(HttpServletRequest request)
+    {
+        List<Category> listAllCategorys = getComboCategories();
+        Collection<Category> listCategorys = new ArrayList<Category>(  );
+        
+        if(SecurityService.isAuthenticationEnable())
+        {
+            for ( Category c : listAllCategorys)
+            {
+                if(SecurityService.getInstance().isUserInRole(request, c.getCategoryRole()))
+                {
+                    listCategorys.add( c );
+                }
+            }
+        }
+        else
+        {
+            for ( Category c : listAllCategorys)
+            {
+                listCategorys.add( c );
+            }
+        }
+        return (List<Category>) listCategorys;
+    }
+    
+    /**
+    * Returns a boolean for the authorisation
+    * @return the boolean
+    */
+    public boolean isAuthorized(HttpServletRequest request, Category category)
+    {
+        boolean isRole = true;
+        
+        if(SecurityService.isAuthenticationEnable())
+        {
+            isRole = SecurityService.getInstance().isUserInRole(request, _category.getCategoryRole());
+            if(_category.getCategoryRole().equals("No restriction"))
+            {
+                isRole = true;
+            }
+        }
+        return isRole;
     }
 }

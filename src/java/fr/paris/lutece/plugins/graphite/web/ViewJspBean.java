@@ -41,6 +41,7 @@ import fr.paris.lutece.plugins.graphite.business.GraphHome;
 import fr.paris.lutece.portal.service.workgroup.AdminWorkgroupService;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -83,7 +84,7 @@ public class ViewJspBean extends ViewGraphJspBean
         else
         {
             //default category
-            List<Category> listCategories = getComboCategories();
+            List<Category> listCategories = getAuthorizedCategory();
             if(!CollectionUtils.isEmpty(listCategories))
             {
                 boolean find = false;
@@ -110,8 +111,8 @@ public class ViewJspBean extends ViewGraphJspBean
             _category = CategoryHome.findByPrimaryKey( nId );
             model.put( MARK_CATEGORY, _category);
             model.put( MARKER_GRAPHS_LIST, GraphHome.getGraphsList(  ) );
-            model.put( MARK_CATEGORIES_COMBO, AdminWorkgroupService.getAuthorizedCollection(getComboCategories(), getUser()));
-            model.put( MARKER_WORKGROUP, AdminWorkgroupService.isAuthorized(_category, getUser()));
+            model.put( MARK_CATEGORIES_COMBO, getAuthorizedCategory());
+            model.put( MARKER_WORKGROUP, isAuthorized(_category));
         }
         return getPage( PROPERTY_PAGE_TITLE_VIEW_GRAPHS, TEMPLATE_PAGE, model );
     }
@@ -125,5 +126,43 @@ public class ViewJspBean extends ViewGraphJspBean
         List<Category> listCategorys = (List<Category>) CategoryHome.getCategorysList(  );
         
         return listCategorys;
+    }
+    
+    /**
+    * Returns the Authorized Collection
+    * @return the Authorized Collection
+    */
+    public List<Category> getAuthorizedCategory()
+    {
+        List<Category> listAllCategorys = getComboCategories();
+        Collection<Category> listCategorys = AdminWorkgroupService.getAuthorizedCollection(getComboCategories(), getUser());
+        
+        for (Category c : listAllCategorys)
+        {
+            if (c.getWorkgroup().equals("<Non assigné à un groupe>"))
+            {
+                listCategorys.add(c);
+            }
+        }
+        return (List<Category>) listCategorys;
+    }
+    
+    /**
+    * Returns a boolean for the authorisation
+    * @return the boolean
+    */
+    public boolean isAuthorized(Category category)
+    {
+        boolean isAuthorized = false;
+        
+        if(AdminWorkgroupService.isAuthorized(category, getUser()))
+        {
+            isAuthorized = true;
+        }
+        if(category.getWorkgroup().equals("<Non assigné à un groupe>"))
+        {
+            isAuthorized = true;
+        }
+        return isAuthorized;
     }
 }
