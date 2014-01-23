@@ -26,8 +26,8 @@
         <dependency>
             <groupId>fr.paris.lutece</groupId>
             <artifactId>lutece-core</artifactId>
-            <version>4.1.1</version>
-            <type>jar</type>
+            <version>[4.1.0,)</version>
+            <type>lutece-core</type>
         </dependency>
     </dependencies>
 
