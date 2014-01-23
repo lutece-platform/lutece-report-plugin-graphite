@@ -37,6 +37,7 @@ import fr.paris.lutece.plugins.graphite.business.Category;
 import fr.paris.lutece.plugins.graphite.business.CategoryHome;
 import fr.paris.lutece.plugins.graphite.business.GraphHome;
 import fr.paris.lutece.portal.service.security.SecurityService;
+import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.web.xpages.XPage;
 import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
@@ -59,6 +60,8 @@ public class Graphite extends MVCApplication
 {
     private static final String TEMPLATE_XPAGE = "/skin/plugins/graphite/graphite.html";
     private static final String VIEW_HOME = "home";
+    
+    private static final String PROPERTY_DEFAULT_ROLE_CODE = "defaultRole.code";
     
     private static final String MARK_CATEGORIES_COMBO = "combo_categories";
     private static final String MARK_CATEGORY = "categorie";
@@ -147,7 +150,7 @@ public class Graphite extends MVCApplication
         {
             for ( Category c : listAllCategorys)
             {
-                if(SecurityService.getInstance().isUserInRole(request, c.getCategoryRole()))
+                if(SecurityService.getInstance().isUserInRole(request, c.getCategoryRole()) || c.getCategoryRole().equals(AppPropertiesService.getProperty( PROPERTY_DEFAULT_ROLE_CODE )))
                 {
                     listCategorys.add( c );
                 }
@@ -173,7 +176,11 @@ public class Graphite extends MVCApplication
         
         if(SecurityService.isAuthenticationEnable())
         {
-            isRole = SecurityService.getInstance().isUserInRole(request, _category.getCategoryRole());
+            isRole = SecurityService.getInstance().isUserInRole(request, category.getCategoryRole());
+            if(category.getCategoryRole().equals(AppPropertiesService.getProperty( PROPERTY_DEFAULT_ROLE_CODE )))
+            {
+                isRole = true;
+            }
         }
         return isRole;
     }
