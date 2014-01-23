@@ -227,7 +227,7 @@ public class CategoryJspBean extends ManageGraphJspBean
         
         for(Graph g : GraphHome.getGraphsList())
         {
-            if(g.getGraphCategory().equals(CategoryHome.findByPrimaryKey( nId ).getCategoryTitle()))
+            if(g.getGraphCategory() == CategoryHome.findByPrimaryKey( nId ).getIdCategory())
             {
                 GraphHome.remove(g.getIdGraph());
             }
@@ -283,7 +283,14 @@ public class CategoryJspBean extends ManageGraphJspBean
         {
             return redirect( request, VIEW_MODIFY_CATEGORY, PARAMETER_ID_CATEGORY, _category.getIdCategory(  ) );
         }
-
+        
+        for(Graph g : GraphHome.getGraphsList())
+        {
+            if(g.getGraphCategory() == _category.getIdCategory())
+            {
+                GraphHome.update(g);
+            }
+        }
         CategoryHome.update( _category );
         _category = null;
         addInfo( INFO_CATEGORY_UPDATED, getLocale(  ) );

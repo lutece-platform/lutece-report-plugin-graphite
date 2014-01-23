@@ -47,8 +47,8 @@ public class GraphBusinessTest extends LuteceTestCase
     private final static String GRAPHURL2 = "GraphUrl2";
     private final static int GRAPHORDER1 = 1;
     private final static int GRAPHORDER2 = 2;
-    private final static String GRAPHCATEGORY1 = "GraphCategory1";
-    private final static String GRAPHCATEGORY2 = "GraphCategory2";
+    private final static int GRAPHCATEGORY1 = 1;
+    private final static int GRAPHCATEGORY2 = 2;
     private final static String GRAPHCOMMENT1 = "GraphComment1";
     private final static String GRAPHCOMMENT2 = "GraphComment2";
 

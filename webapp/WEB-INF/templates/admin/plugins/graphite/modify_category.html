@@ -27,9 +27,9 @@
                     <select name="category_role" id="category_role">
                     <#list combo_roles?sort_by('name') as r>
                         <#if r.name == role>
-                        <option value="${r.name}" selected>${r.name}</option> 
+                        <option value="${r.code}" selected>${r.name}</option> 
                         <#else>
-                        <option value="${r.name}">${r.name}</option> 
+                        <option value="${r.code}">${r.name}</option> 
                         </#if>
                     </#list>
                     </select>
@@ -43,9 +43,9 @@
                     <select name="category_workgroup" id="category_workgroup">
                     <#list combo_workgroups?sort_by('name') as wg>
                         <#if wg.name == workgroup>
-                        <option value="${wg.name}" selected>${wg.name}</option> 
+                        <option value="${wg.code}" selected>${wg.name}</option> 
                         <#else>
-                        <option value="${wg.name}">${wg.name}</option> 
+                        <option value="${wg.code}">${wg.name}</option> 
                         </#if>
                     </#list>
                     </select>

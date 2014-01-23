@@ -37,7 +37,7 @@
                 <div class="controls">
                     <select name="graph_category" id="graph_category">
                     <#list combo_categories?sort_by('name') as category>
-                        <option value="${category.name}">${category.name}</option> 
+                        <option value="${category.code}">${category.name}</option> 
                     </#list>
                     </select>
                     <span class="help-block">#i18n{graphite.create_graph.labelGraphCategory.help}</span>

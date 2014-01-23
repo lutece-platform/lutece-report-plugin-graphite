@@ -38,6 +38,7 @@ import fr.paris.lutece.plugins.graphite.business.CategoryHome;
 import fr.paris.lutece.plugins.graphite.business.GraphHome;
 import fr.paris.lutece.portal.service.security.SecurityService;
 import fr.paris.lutece.portal.web.xpages.XPage;
+import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.annotations.Controller;
@@ -54,7 +55,7 @@ import org.apache.commons.lang.StringUtils;
  * This class provides a simple implementation of an XPage
  */
  
-@Controller( xpageName = "Graphite" , pageTitleProperty = "graphite.pageTitle" , pagePathProperty = "graphite.pagePathLabel" )
+@Controller( xpageName = "graphite" , pageTitleProperty = "graphite.pageTitle" , pagePathProperty = "graphite.pagePathLabel" )
 public class Graphite extends MVCApplication
 {
     private static final String TEMPLATE_XPAGE = "/skin/plugins/graphite/graphite.html";
@@ -174,10 +175,6 @@ public class Graphite extends MVCApplication
         if(SecurityService.isAuthenticationEnable())
         {
             isRole = SecurityService.getInstance().isUserInRole(request, _category.getCategoryRole());
-            if(_category.getCategoryRole().equals("No restriction"))
-            {
-                isRole = true;
-            }
         }
         return isRole;
     }

@@ -46,6 +46,8 @@ import org.hibernate.validator.constraints.*;
 public class Category implements AdminWorkgroupResource
 {
 	// Variables declarations 
+        private static final String INFO_CATEGORY_DISPLAY_YES = "#i18n{graphite.info.yes}";
+        private static final String INFO_CATEGORY_DISPLAY_NO = "#i18n{graphite.info.no}";
         
 	private int _nIdCategory;
         // @NotEmpty( message = "#i18n{graphite.validation.category.CategoryTitle.notEmpty}" )
@@ -147,6 +149,25 @@ public class Category implements AdminWorkgroupResource
 	{
 		return _nDisplayFront;
 	}
+        
+        /**
+	 * Returns the DisplayFront String
+	 * @return The DisplayFront String
+	 */
+	public String getDisplayFrontString()
+	{
+            String displayFront = "";
+            
+            if ( _nDisplayFront == 1 )
+            {
+                displayFront = INFO_CATEGORY_DISPLAY_YES;
+            }
+            else
+            {
+                displayFront = INFO_CATEGORY_DISPLAY_NO;
+            }
+            return displayFront;
+	}
 
 	/**
 	 * Sets the DisplayFront
@@ -163,6 +184,25 @@ public class Category implements AdminWorkgroupResource
 	public int getDisplayBack()
 	{
 		return _nDisplayBack;
+	}
+        
+        /**
+	 * Returns the DisplayBack String
+	 * @return The DisplayBack String
+	 */
+	public String getDisplayBackString()
+	{
+            String displayBack = "";
+            
+            if ( _nDisplayBack == 1 )
+            {
+                displayBack = INFO_CATEGORY_DISPLAY_YES;
+            }
+            else
+            {
+                displayBack = INFO_CATEGORY_DISPLAY_NO;
+            }
+            return displayBack;
 	}
 
 	/**
@@ -185,7 +225,7 @@ public class Category implements AdminWorkgroupResource
 
             for ( Graph g : listGraphs )
             {
-                if ( g.getGraphCategory().equals(_strCategoryTitle) )
+                if ( g.getGraphCategory() == _nIdCategory )
                 {
                     list.add( g );
                 }

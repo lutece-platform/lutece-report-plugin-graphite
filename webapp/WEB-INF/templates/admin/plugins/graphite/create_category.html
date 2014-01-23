@@ -23,7 +23,7 @@
                 <div class="controls">
                     <select name="category_role" id="category_role">
                     <#list combo_roles?sort_by('name') as role>
-                        <option value="${role.name}">${role.name}</option> 
+                        <option value="${role.code}">${role.name}</option> 
                     </#list>
                     </select>
                     <span class="help-block">#i18n{graphite.create_category.labelCategoryRole.help}</span>
@@ -34,7 +34,7 @@
                 <div class="controls">
                     <select name="category_workgroup" id="category_workgroup">
                     <#list combo_workgroups?sort_by('name') as workgroup>
-                        <option value="${workgroup.name}">${workgroup.name}</option> 
+                        <option value="${workgroup.code}">${workgroup.name}</option> 
                     </#list>
                     </select>
                     <span class="help-block">#i18n{graphite.create_category.labelCategoryWorkgroup.help}</span>

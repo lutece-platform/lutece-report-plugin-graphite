@@ -57,12 +57,8 @@ public class Graph
 	private String _strGraphUrl;
         
 	private int _nGraphOrder;
-        // @NotEmpty( message = "#i18n{graphite.validation.graph.GraphCategory.notEmpty}" )
-        @NotEmpty( message = "#i18n{portal.validation.message.notEmpty}" )
-        // @Size( max = 255 , message = "#i18n{graphite.validation.graph.GraphCategory.size}" ) 
-        @Size( max = 255 , message = "#i18n{portal.validation.message.sizeMax}" ) 
         
-	private String _strGraphCategory;
+	private int _nGraphCategory;
         // @Size( max = 255 , message = "#i18n{graphite.validation.graph.GraphComment.size}" ) 
         @Size( max = 255 , message = "#i18n{portal.validation.message.sizeMax}" ) 
         
@@ -139,19 +135,29 @@ public class Graph
 	 * Returns the GraphCategory
 	 * @return The GraphCategory
 	 */
-	public String getGraphCategory()
+	public int getGraphCategory()
 	{
-		return _strGraphCategory;
+		return _nGraphCategory;
 	}
 
 	/**
 	 * Sets the GraphCategory
 	 * @param strGraphCategory The GraphCategory
 	 */ 
-	public void setGraphCategory( String strGraphCategory )
+	public void setGraphCategory( int nGraphCategory )
 	{
-		_strGraphCategory = strGraphCategory;
+		_nGraphCategory = nGraphCategory;
 	}
+        
+        /**
+	 * Returns the GraphCategory title
+	 * @return The GraphCategory title
+	 */
+	public String getGraphCategoryTitle()
+	{
+		return CategoryHome.findByPrimaryKey( _nGraphCategory ).getCategoryTitle();
+	}
+        
 	/**
 	 * Returns the GraphComment
 	 * @return The GraphComment

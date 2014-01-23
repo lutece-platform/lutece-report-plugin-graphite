@@ -9,7 +9,7 @@
             <#list combo_categories?sort_by('categoryTitle') as category>
                 <#if category.displayFront == 1>
                     <li <#if category.idCategory == categorie.idCategory>class="active"</#if>>
-                        <a href="jsp/site/Portal.jsp?page=Graphite&view=viewHome&category=${category.idCategory}">
+                        <a href="jsp/site/Portal.jsp?page=graphite&view=viewHome&category=${category.idCategory}">
                             ${category.categoryTitle}
                         </a>
                     </li>

@@ -38,11 +38,13 @@ package fr.paris.lutece.plugins.graphite.web;
 import fr.paris.lutece.plugins.graphite.business.Category;
 import fr.paris.lutece.plugins.graphite.business.CategoryHome;
 import fr.paris.lutece.plugins.graphite.business.GraphHome;
+import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.service.workgroup.AdminWorkgroupService;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.CollectionUtils;
@@ -134,16 +136,8 @@ public class ViewJspBean extends ViewGraphJspBean
     */
     public List<Category> getAuthorizedCategory()
     {
-        List<Category> listAllCategorys = getComboCategories();
         Collection<Category> listCategorys = AdminWorkgroupService.getAuthorizedCollection(getComboCategories(), getUser());
-        
-        for (Category c : listAllCategorys)
-        {
-            if (c.getWorkgroup().equals("<Non assigné à un groupe>"))
-            {
-                listCategorys.add(c);
-            }
-        }
+
         return (List<Category>) listCategorys;
     }
     
@@ -156,10 +150,6 @@ public class ViewJspBean extends ViewGraphJspBean
         boolean isAuthorized = false;
         
         if(AdminWorkgroupService.isAuthorized(category, getUser()))
-        {
-            isAuthorized = true;
-        }
-        if(category.getWorkgroup().equals("<Non assigné à un groupe>"))
         {
             isAuthorized = true;
         }

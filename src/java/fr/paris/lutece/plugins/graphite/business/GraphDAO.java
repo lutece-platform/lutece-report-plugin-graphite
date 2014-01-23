@@ -98,7 +98,7 @@ public final class GraphDAO implements IGraphDAO
 		daoUtil.setString( 2, graph.getGraphTitle( ) );
 		daoUtil.setString( 3, graph.getGraphUrl( ) );
 		daoUtil.setInt( 4, graph.getGraphOrder( ) );
-		daoUtil.setString( 5, graph.getGraphCategory( ) );
+		daoUtil.setInt( 5, graph.getGraphCategory( ) );
 		daoUtil.setString( 6, graph.getGraphComment( ) );
 
 		daoUtil.executeUpdate( );
@@ -125,7 +125,7 @@ public final class GraphDAO implements IGraphDAO
 			graph.setGraphTitle( daoUtil.getString(  2 ) );
 			graph.setGraphUrl( daoUtil.getString(  3 ) );
 			graph.setGraphOrder( daoUtil.getInt(  4 ) );
-			graph.setGraphCategory( daoUtil.getString(  5 ) );
+			graph.setGraphCategory( daoUtil.getInt(  5 ) );
 			graph.setGraphComment( daoUtil.getString(  6 ) );
 		}
 
@@ -159,7 +159,7 @@ public final class GraphDAO implements IGraphDAO
 		daoUtil.setString( 2, graph.getGraphTitle( ) );
 		daoUtil.setString( 3, graph.getGraphUrl( ) );
 		daoUtil.setInt( 4, graph.getGraphOrder( ) );
-		daoUtil.setString( 5, graph.getGraphCategory( ) );
+		daoUtil.setInt( 5, graph.getGraphCategory( ) );
 		daoUtil.setString( 6, graph.getGraphComment( ) );
 		daoUtil.setInt( 7, graph.getIdGraph( ) );
 				
@@ -187,7 +187,7 @@ public final class GraphDAO implements IGraphDAO
 					graph.setGraphTitle( daoUtil.getString( 2 ) );
 					graph.setGraphUrl( daoUtil.getString( 3 ) );
 					graph.setGraphOrder( daoUtil.getInt( 4 ) );
-					graph.setGraphCategory( daoUtil.getString( 5 ) );
+					graph.setGraphCategory( daoUtil.getInt( 5 ) );
 					graph.setGraphComment( daoUtil.getString( 6 ) );
 
 				graphList.add( graph );

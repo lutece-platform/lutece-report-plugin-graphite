@@ -36,7 +36,7 @@
   	<!-- XPages parameters -->
     <applications>
         <application>
-            <application-id>Graphite</application-id>
+            <application-id>graphite</application-id>
             <application-class>fr.paris.lutece.plugins.graphite.web.Graphite</application-class>
         </application>
     </applications>

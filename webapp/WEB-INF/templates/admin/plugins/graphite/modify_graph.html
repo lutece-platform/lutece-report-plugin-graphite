@@ -42,10 +42,10 @@
                 <div class="controls">
                     <select name="graph_category" id="graph_category">
                     <#list combo_categories?sort_by('name') as c>
-                        <#if c.name == category>
-                        <option value="${c.name}" selected>${c.name}</option> 
+                        <#if c.code?number == category>
+                        <option value="${c.code}" selected>${c.name}</option> 
                         <#else>
-                        <option value="${c.name}">${c.name}</option>
+                        <option value="${c.code}">${c.name}</option>
                         </#if>
                     </#list>
                     </select>
