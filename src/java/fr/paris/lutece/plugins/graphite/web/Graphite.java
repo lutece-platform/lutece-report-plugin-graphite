@@ -38,7 +38,6 @@ import fr.paris.lutece.plugins.graphite.business.CategoryHome;
 import fr.paris.lutece.plugins.graphite.business.GraphHome;
 import fr.paris.lutece.portal.service.security.SecurityService;
 import fr.paris.lutece.portal.web.xpages.XPage;
-import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.annotations.Controller;
