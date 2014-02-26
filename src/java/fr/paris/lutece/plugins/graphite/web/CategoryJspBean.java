@@ -250,10 +250,7 @@ public class CategoryJspBean extends ManageGraphJspBean
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_CATEGORY ) );
 
-        if ( _category == null )
-        {
-            _category = CategoryHome.findByPrimaryKey( nId );
-        }
+        _category = CategoryHome.findByPrimaryKey( nId );
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_CATEGORY, _category );

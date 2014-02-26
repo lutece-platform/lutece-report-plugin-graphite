@@ -229,10 +229,7 @@ public class GraphJspBean extends ManageGraphJspBean
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_GRAPH ) );
 
-        if ( _graph == null )
-        {
-            _graph = GraphHome.findByPrimaryKey( nId );
-        }
+        _graph = GraphHome.findByPrimaryKey( nId );
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_GRAPH, _graph );
