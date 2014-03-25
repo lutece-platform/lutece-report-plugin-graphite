@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<plug-in>
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><plug-in>
     <name>graphite</name>
     <class>fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation</class>
     <version>1.0.0</version>
-    <documentation></documentation>
-    <installation></installation>
-    <changes></changes>
-    <user-guide></user-guide>
+    <documentation/>
+    <installation/>
+    <changes/>
+    <user-guide/>
     <description>graphite.plugin.description</description>
     <provider>graphite.plugin.provider</provider>
     <provider-url>http://fr.lutece.paris.fr</provider-url>
@@ -22,7 +21,7 @@
             <feature-description>graphite.adminFeature.ManageGraph.description</feature-description>
             <feature-level>0</feature-level>
             <feature-url>jsp/admin/plugins/graphite/ManageGraphs.jsp</feature-url>
-            <feature-icon-url></feature-icon-url>
+            <feature-icon-url/>
       </admin-feature>
         <admin-feature>
             <feature-id>GRAPHITE_VIEW</feature-id>
@@ -30,7 +29,7 @@
             <feature-description>graphite.adminFeature.ViewGraph.description</feature-description>
             <feature-level>0</feature-level>
             <feature-url>jsp/admin/plugins/graphite/ViewGraphs.jsp</feature-url>
-            <feature-icon-url></feature-icon-url>
+            <feature-icon-url/>
       </admin-feature>
     </admin-features>    
   	<!-- XPages parameters -->
@@ -55,8 +54,8 @@
         <portlet-modify-script-template>/admin/portlet/script_modify_portlet.html</portlet-modify-script-template>
         <portlet-create-specific-template>/admin/plugins/graphite/portlet/create_portletgraphite.html</portlet-create-specific-template>
         <portlet-modify-specific-template>/admin/plugins/graphite/portlet/modify_portletgraphite.html</portlet-modify-specific-template>
-        <portlet-create-specific-form-template></portlet-create-specific-form-template>
-        <portlet-modify-specific-form-template></portlet-modify-specific-form-template> 
+        <portlet-create-specific-form-template/>
+        <portlet-modify-specific-form-template/> 
      </portlet>
    </portlets>
 </plug-in>
