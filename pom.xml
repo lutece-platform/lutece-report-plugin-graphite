@@ -10,7 +10,7 @@
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>plugin-graphite</artifactId>
     <packaging>lutece-plugin</packaging>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>Lutece graphite plugin</name>
     <build>
         <plugins>
@@ -61,13 +61,7 @@
     <properties>
         <componentName>graphite</componentName>
         <jiraProjectName>GRAPHITE</jiraProjectName>
-        <jiraComponentId />
+        <jiraComponentId></jiraComponentId>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-  <scm>
-    <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/tags/plugin-graphite-1.0.0</connection>
-    <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/tags/plugin-graphite-1.0.0</developerConnection>
-    <url>http://dev.lutece.paris.fr/viewvc/portal/tags/plugin-graphite-1.0.0</url>
-  </scm>
 </project>
