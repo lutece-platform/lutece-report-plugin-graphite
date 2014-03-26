@@ -61,15 +61,7 @@
     <properties>
         <componentName>graphite</componentName>
         <jiraProjectName>GRAPHITE</jiraProjectName>
-        <jiraComponentId />
+        <jiraComponentId></jiraComponentId>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    
-    <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/technical/plugin-graphite</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/technical/plugin-graphite</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/technical/plugin-graphite</url>
-    </scm>
-
 </project>
