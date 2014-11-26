@@ -67,9 +67,9 @@
 
     
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/technical/plugin-graphite</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/technical/plugin-graphite</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/technical/plugin-graphite</url>
+        <connection>scm:svn:https://github.com/lutece-platform/lutece-report-plugin-graphite.git</connection>
+        <developerConnection>scm:svn:https://github.com/lutece-platform/lutece-report-plugin-graphite.git</developerConnection>
+        <url>https://github.com/lutece-platform/lutece-report-plugin-graphite.git</url>
     </scm>
 
 </project>
