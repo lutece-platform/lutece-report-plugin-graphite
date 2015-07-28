@@ -3,7 +3,7 @@
     <parent>
         <artifactId>lutece-global-pom</artifactId>
         <groupId>fr.paris.lutece.tools</groupId>
-        <version>3.0</version>
+        <version>3.0.3</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -42,7 +42,7 @@
     <properties>
         <componentName>graphite</componentName>
         <jiraProjectName>GRAPHITE</jiraProjectName>
-        <jiraComponentId />
+        <jiraComponentId/>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
