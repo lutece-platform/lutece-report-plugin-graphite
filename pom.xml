@@ -34,7 +34,7 @@
         <dependency>
             <groupId>fr.paris.lutece</groupId>
             <artifactId>lutece-core</artifactId>
-            <version>[4.1.0,)</version>
+            <version>[4.1.0,7.9.9)</version>
             <type>lutece-core</type>
         </dependency>
     </dependencies>
@@ -42,7 +42,7 @@
     <properties>
         <componentName>graphite</componentName>
         <jiraProjectName>GRAPHITE</jiraProjectName>
-        <jiraComponentId/>
+        <jiraComponentId />
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
